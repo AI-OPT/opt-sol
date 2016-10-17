@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.opt.sol.dao.mapper.interfaces.SolServiceDesignOutputMapper">
+  <resultMap id="BaseResultMap" type="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignOutput">
+    <id column="OUTPUT_ID" jdbcType="VARCHAR" property="outputId" />
+    <result column="SRV_API_ID" jdbcType="VARCHAR" property="srvApiId" />
+    <result column="OUTPUT_NAME" jdbcType="VARCHAR" property="outputName" />
+    <result column="PARENT_OUTPUT_NAME" jdbcType="VARCHAR" property="parentOutputName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    OUTPUT_ID, SRV_API_ID, OUTPUT_NAME, PARENT_OUTPUT_NAME
+  </sql>
+  <select id="selectByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignOutputCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sol_service_design_output
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart&gt;=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sol_service_design_output
+    where OUTPUT_ID = #{outputId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sol_service_design_output
+    where OUTPUT_ID = #{outputId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignOutputCriteria">
+    delete from sol_service_design_output
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignOutput">
+    insert into sol_service_design_output (OUTPUT_ID, SRV_API_ID, OUTPUT_NAME, 
+      PARENT_OUTPUT_NAME)
+    values (#{outputId,jdbcType=VARCHAR}, #{srvApiId,jdbcType=VARCHAR}, #{outputName,jdbcType=VARCHAR}, 
+      #{parentOutputName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignOutput">
+    insert into sol_service_design_output
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="outputId != null">
+        OUTPUT_ID,
+      </if>
+      <if test="srvApiId != null">
+        SRV_API_ID,
+      </if>
+      <if test="outputName != null">
+        OUTPUT_NAME,
+      </if>
+      <if test="parentOutputName != null">
+        PARENT_OUTPUT_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="outputId != null">
+        #{outputId,jdbcType=VARCHAR},
+      </if>
+      <if test="srvApiId != null">
+        #{srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="outputName != null">
+        #{outputName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOutputName != null">
+        #{parentOutputName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignOutputCriteria" resultType="java.lang.Integer">
+    select count(*) from sol_service_design_output
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sol_service_design_output
+    <set>
+      <if test="record.outputId != null">
+        OUTPUT_ID = #{record.outputId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvApiId != null">
+        SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outputName != null">
+        OUTPUT_NAME = #{record.outputName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentOutputName != null">
+        PARENT_OUTPUT_NAME = #{record.parentOutputName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sol_service_design_output
+    set OUTPUT_ID = #{record.outputId,jdbcType=VARCHAR},
+      SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
+      OUTPUT_NAME = #{record.outputName,jdbcType=VARCHAR},
+      PARENT_OUTPUT_NAME = #{record.parentOutputName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignOutput">
+    update sol_service_design_output
+    <set>
+      <if test="srvApiId != null">
+        SRV_API_ID = #{srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="outputName != null">
+        OUTPUT_NAME = #{outputName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentOutputName != null">
+        PARENT_OUTPUT_NAME = #{parentOutputName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where OUTPUT_ID = #{outputId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignOutput">
+    update sol_service_design_output
+    set SRV_API_ID = #{srvApiId,jdbcType=VARCHAR},
+      OUTPUT_NAME = #{outputName,jdbcType=VARCHAR},
+      PARENT_OUTPUT_NAME = #{parentOutputName,jdbcType=VARCHAR}
+    where OUTPUT_ID = #{outputId,jdbcType=VARCHAR}
+  </update>
+</mapper>

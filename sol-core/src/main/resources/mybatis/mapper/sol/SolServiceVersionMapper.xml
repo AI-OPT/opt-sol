@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.opt.sol.dao.mapper.interfaces.SolServiceVersionMapper">
+  <resultMap id="BaseResultMap" type="com.ai.opt.sol.dao.mapper.bo.SolServiceVersion">
+    <id column="SRV_VERSION_ID" jdbcType="VARCHAR" property="srvVersionId" />
+    <result column="SRV_API_ID" jdbcType="VARCHAR" property="srvApiId" />
+    <result column="SRV_VERSION" jdbcType="VARCHAR" property="srvVersion" />
+    <result column="VERSION_REMARK" jdbcType="VARCHAR" property="versionRemark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SRV_VERSION_ID, SRV_API_ID, SRV_VERSION, VERSION_REMARK
+  </sql>
+  <select id="selectByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersionCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sol_service_version
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart&gt;=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sol_service_version
+    where SRV_VERSION_ID = #{srvVersionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sol_service_version
+    where SRV_VERSION_ID = #{srvVersionId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersionCriteria">
+    delete from sol_service_version
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersion">
+    insert into sol_service_version (SRV_VERSION_ID, SRV_API_ID, SRV_VERSION, 
+      VERSION_REMARK)
+    values (#{srvVersionId,jdbcType=VARCHAR}, #{srvApiId,jdbcType=VARCHAR}, #{srvVersion,jdbcType=VARCHAR}, 
+      #{versionRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersion">
+    insert into sol_service_version
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="srvVersionId != null">
+        SRV_VERSION_ID,
+      </if>
+      <if test="srvApiId != null">
+        SRV_API_ID,
+      </if>
+      <if test="srvVersion != null">
+        SRV_VERSION,
+      </if>
+      <if test="versionRemark != null">
+        VERSION_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="srvVersionId != null">
+        #{srvVersionId,jdbcType=VARCHAR},
+      </if>
+      <if test="srvApiId != null">
+        #{srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="srvVersion != null">
+        #{srvVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="versionRemark != null">
+        #{versionRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersionCriteria" resultType="java.lang.Integer">
+    select count(*) from sol_service_version
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sol_service_version
+    <set>
+      <if test="record.srvVersionId != null">
+        SRV_VERSION_ID = #{record.srvVersionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvApiId != null">
+        SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvVersion != null">
+        SRV_VERSION = #{record.srvVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.versionRemark != null">
+        VERSION_REMARK = #{record.versionRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sol_service_version
+    set SRV_VERSION_ID = #{record.srvVersionId,jdbcType=VARCHAR},
+      SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
+      SRV_VERSION = #{record.srvVersion,jdbcType=VARCHAR},
+      VERSION_REMARK = #{record.versionRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersion">
+    update sol_service_version
+    <set>
+      <if test="srvApiId != null">
+        SRV_API_ID = #{srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="srvVersion != null">
+        SRV_VERSION = #{srvVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="versionRemark != null">
+        VERSION_REMARK = #{versionRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SRV_VERSION_ID = #{srvVersionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersion">
+    update sol_service_version
+    set SRV_API_ID = #{srvApiId,jdbcType=VARCHAR},
+      SRV_VERSION = #{srvVersion,jdbcType=VARCHAR},
+      VERSION_REMARK = #{versionRemark,jdbcType=VARCHAR}
+    where SRV_VERSION_ID = #{srvVersionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

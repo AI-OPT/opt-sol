@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.opt.sol.dao.mapper.interfaces.SolServiceDesignInputMapper">
+  <resultMap id="BaseResultMap" type="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignInput">
+    <id column="INPUT_ID" jdbcType="VARCHAR" property="inputId" />
+    <result column="SRV_API_ID" jdbcType="VARCHAR" property="srvApiId" />
+    <result column="INPUT_NAME" jdbcType="VARCHAR" property="inputName" />
+    <result column="PARENT_INPUT_NAME" jdbcType="VARCHAR" property="parentInputName" />
+    <result column="ISREQUIRED" jdbcType="VARCHAR" property="isrequired" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    INPUT_ID, SRV_API_ID, INPUT_NAME, PARENT_INPUT_NAME, ISREQUIRED
+  </sql>
+  <select id="selectByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignInputCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sol_service_design_input
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart&gt;=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sol_service_design_input
+    where INPUT_ID = #{inputId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sol_service_design_input
+    where INPUT_ID = #{inputId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignInputCriteria">
+    delete from sol_service_design_input
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignInput">
+    insert into sol_service_design_input (INPUT_ID, SRV_API_ID, INPUT_NAME, 
+      PARENT_INPUT_NAME, ISREQUIRED)
+    values (#{inputId,jdbcType=VARCHAR}, #{srvApiId,jdbcType=VARCHAR}, #{inputName,jdbcType=VARCHAR}, 
+      #{parentInputName,jdbcType=VARCHAR}, #{isrequired,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignInput">
+    insert into sol_service_design_input
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="inputId != null">
+        INPUT_ID,
+      </if>
+      <if test="srvApiId != null">
+        SRV_API_ID,
+      </if>
+      <if test="inputName != null">
+        INPUT_NAME,
+      </if>
+      <if test="parentInputName != null">
+        PARENT_INPUT_NAME,
+      </if>
+      <if test="isrequired != null">
+        ISREQUIRED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="inputId != null">
+        #{inputId,jdbcType=VARCHAR},
+      </if>
+      <if test="srvApiId != null">
+        #{srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="inputName != null">
+        #{inputName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentInputName != null">
+        #{parentInputName,jdbcType=VARCHAR},
+      </if>
+      <if test="isrequired != null">
+        #{isrequired,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignInputCriteria" resultType="java.lang.Integer">
+    select count(*) from sol_service_design_input
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sol_service_design_input
+    <set>
+      <if test="record.inputId != null">
+        INPUT_ID = #{record.inputId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvApiId != null">
+        SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputName != null">
+        INPUT_NAME = #{record.inputName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentInputName != null">
+        PARENT_INPUT_NAME = #{record.parentInputName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isrequired != null">
+        ISREQUIRED = #{record.isrequired,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sol_service_design_input
+    set INPUT_ID = #{record.inputId,jdbcType=VARCHAR},
+      SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
+      INPUT_NAME = #{record.inputName,jdbcType=VARCHAR},
+      PARENT_INPUT_NAME = #{record.parentInputName,jdbcType=VARCHAR},
+      ISREQUIRED = #{record.isrequired,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignInput">
+    update sol_service_design_input
+    <set>
+      <if test="srvApiId != null">
+        SRV_API_ID = #{srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="inputName != null">
+        INPUT_NAME = #{inputName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentInputName != null">
+        PARENT_INPUT_NAME = #{parentInputName,jdbcType=VARCHAR},
+      </if>
+      <if test="isrequired != null">
+        ISREQUIRED = #{isrequired,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where INPUT_ID = #{inputId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDesignInput">
+    update sol_service_design_input
+    set SRV_API_ID = #{srvApiId,jdbcType=VARCHAR},
+      INPUT_NAME = #{inputName,jdbcType=VARCHAR},
+      PARENT_INPUT_NAME = #{parentInputName,jdbcType=VARCHAR},
+      ISREQUIRED = #{isrequired,jdbcType=VARCHAR}
+    where INPUT_ID = #{inputId,jdbcType=VARCHAR}
+  </update>
+</mapper>

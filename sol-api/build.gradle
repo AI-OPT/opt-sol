@@ -1,0 +1,76 @@
+def List<Map<String,String>> apiList = new ArrayList<Map<String,String>>();
+Set<File> fileSet = fileTree(apiDir) { include '**/*.ini' }.getFiles();
+for(File file:fileSet){
+    File f1 = new File(file.getParent());
+    String apiName =  f1.getName();
+    String version = file.getText('UTF-8');
+
+    Map<String,String> apiMap = new HashMap<String,String>();
+    apiMap.put("apiName", apiName);
+    apiMap.put("apiArtifactId", apiName);
+    apiMap.put("apiTaskName", "A"+apiName);
+    apiMap.put("apiVersion", version);
+    apiList.add(apiMap);
+}
+
+
+def Map<String,Object> apiTaskMap = new HashMap<String,Object>();
+for(Map<String,String> apiMap:apiList){
+    String apiName = apiMap.get("apiName");
+    String apiVersion = apiMap.get("apiVersion");
+    String apiArtifactId = apiMap.get("apiArtifactId");
+    String apiTaskName = apiMap.get("apiTaskName");
+    def jarTask = task("${apiTaskName}Jar", type: Jar){
+        version apiVersion
+        baseName apiArtifactId
+        from sourceSets.main.output
+        destinationDir file("$buildDir/api-libs")
+        include 'com/ai/opt/sol/api/'+apiName+'/**'
+        manifest {
+            attributes 'artifactId': apiArtifactId, 'Built-By': builtBy,'Built-date': new Date().format('yyyy-MM-dd HH:mm:ss'),'Manifest-Version':apiVersion
+        }
+    }
+    apiTaskMap.put(apiName, jarTask);  
+
+}
+
+publishing {
+    publications {
+        for(Map<String,String> apiMap:apiList){
+            String apiName = apiMap.get("apiName");
+            String apiVersion = apiMap.get("apiVersion");
+            String apiArtifactId = apiMap.get("apiArtifactId");
+            publishing.publications.create(apiName, MavenPublication) {
+                groupId group
+                artifactId apiArtifactId
+                version apiVersion
+                artifact  apiTaskMap.get(apiName)
+                pom.withXml {
+                    asNode().children().last() + {
+                        delegate.dependencies {
+                            /*delegate.dependency {
+                                delegate.groupId("com.ai.runner")
+                                delegate.artifactId("runner-base")
+                                delegate.version(runnerBaseVersion)
+                            }*/
+                            delegate.dependency {
+                                delegate.groupId("com.ai.opt")
+                                delegate.artifactId("opt-base")
+                                delegate.version(optBaseVersion)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url  publishURL
+            credentials {
+                username = publishUserName
+                password = publishUserPassword
+            }
+        }
+    }
+}

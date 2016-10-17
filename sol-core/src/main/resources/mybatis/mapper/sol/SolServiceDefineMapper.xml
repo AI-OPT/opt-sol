@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.opt.sol.dao.mapper.interfaces.SolServiceDefineMapper">
+  <resultMap id="BaseResultMap" type="com.ai.opt.sol.dao.mapper.bo.SolServiceDefine">
+    <id column="SRV_API_ID" jdbcType="VARCHAR" property="srvApiId" />
+    <result column="SRV_API_NAME" jdbcType="VARCHAR" property="srvApiName" />
+    <result column="SRV_REMARK" jdbcType="VARCHAR" property="srvRemark" />
+    <result column="SRV_CENTER" jdbcType="VARCHAR" property="srvCenter" />
+    <result column="SRV_CATEGORY_ID" jdbcType="VARCHAR" property="srvCategoryId" />
+    <result column="SRV_CLASS" jdbcType="VARCHAR" property="srvClass" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SRV_API_ID, SRV_API_NAME, SRV_REMARK, SRV_CENTER, SRV_CATEGORY_ID, SRV_CLASS, CREATE_TIME, 
+    UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDefineCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sol_service_define
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart&gt;=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sol_service_define
+    where SRV_API_ID = #{srvApiId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sol_service_define
+    where SRV_API_ID = #{srvApiId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDefineCriteria">
+    delete from sol_service_define
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDefine">
+    insert into sol_service_define (SRV_API_ID, SRV_API_NAME, SRV_REMARK, 
+      SRV_CENTER, SRV_CATEGORY_ID, SRV_CLASS, 
+      CREATE_TIME, UPDATE_TIME)
+    values (#{srvApiId,jdbcType=VARCHAR}, #{srvApiName,jdbcType=VARCHAR}, #{srvRemark,jdbcType=VARCHAR}, 
+      #{srvCenter,jdbcType=VARCHAR}, #{srvCategoryId,jdbcType=VARCHAR}, #{srvClass,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDefine">
+    insert into sol_service_define
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="srvApiId != null">
+        SRV_API_ID,
+      </if>
+      <if test="srvApiName != null">
+        SRV_API_NAME,
+      </if>
+      <if test="srvRemark != null">
+        SRV_REMARK,
+      </if>
+      <if test="srvCenter != null">
+        SRV_CENTER,
+      </if>
+      <if test="srvCategoryId != null">
+        SRV_CATEGORY_ID,
+      </if>
+      <if test="srvClass != null">
+        SRV_CLASS,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="srvApiId != null">
+        #{srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="srvApiName != null">
+        #{srvApiName,jdbcType=VARCHAR},
+      </if>
+      <if test="srvRemark != null">
+        #{srvRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="srvCenter != null">
+        #{srvCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="srvCategoryId != null">
+        #{srvCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="srvClass != null">
+        #{srvClass,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDefineCriteria" resultType="java.lang.Integer">
+    select count(*) from sol_service_define
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sol_service_define
+    <set>
+      <if test="record.srvApiId != null">
+        SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvApiName != null">
+        SRV_API_NAME = #{record.srvApiName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvRemark != null">
+        SRV_REMARK = #{record.srvRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvCenter != null">
+        SRV_CENTER = #{record.srvCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvCategoryId != null">
+        SRV_CATEGORY_ID = #{record.srvCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvClass != null">
+        SRV_CLASS = #{record.srvClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sol_service_define
+    set SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
+      SRV_API_NAME = #{record.srvApiName,jdbcType=VARCHAR},
+      SRV_REMARK = #{record.srvRemark,jdbcType=VARCHAR},
+      SRV_CENTER = #{record.srvCenter,jdbcType=VARCHAR},
+      SRV_CATEGORY_ID = #{record.srvCategoryId,jdbcType=VARCHAR},
+      SRV_CLASS = #{record.srvClass,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDefine">
+    update sol_service_define
+    <set>
+      <if test="srvApiName != null">
+        SRV_API_NAME = #{srvApiName,jdbcType=VARCHAR},
+      </if>
+      <if test="srvRemark != null">
+        SRV_REMARK = #{srvRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="srvCenter != null">
+        SRV_CENTER = #{srvCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="srvCategoryId != null">
+        SRV_CATEGORY_ID = #{srvCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="srvClass != null">
+        SRV_CLASS = #{srvClass,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SRV_API_ID = #{srvApiId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceDefine">
+    update sol_service_define
+    set SRV_API_NAME = #{srvApiName,jdbcType=VARCHAR},
+      SRV_REMARK = #{srvRemark,jdbcType=VARCHAR},
+      SRV_CENTER = #{srvCenter,jdbcType=VARCHAR},
+      SRV_CATEGORY_ID = #{srvCategoryId,jdbcType=VARCHAR},
+      SRV_CLASS = #{srvClass,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where SRV_API_ID = #{srvApiId,jdbcType=VARCHAR}
+  </update>
+</mapper>

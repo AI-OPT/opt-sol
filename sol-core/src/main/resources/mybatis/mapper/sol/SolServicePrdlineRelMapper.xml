@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.opt.sol.dao.mapper.interfaces.SolServicePrdlineRelMapper">
+  <resultMap id="BaseResultMap" type="com.ai.opt.sol.dao.mapper.bo.SolServicePrdlineRel">
+    <id column="SRV_PRDLINE_ID" jdbcType="VARCHAR" property="srvPrdlineId" />
+    <result column="PRDLINE_ID" jdbcType="VARCHAR" property="prdlineId" />
+    <result column="SRV_API_ID" jdbcType="VARCHAR" property="srvApiId" />
+    <result column="PRD_VERSION" jdbcType="VARCHAR" property="prdVersion" />
+    <result column="SRV_VERSION_ID" jdbcType="VARCHAR" property="srvVersionId" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SRV_PRDLINE_ID, PRDLINE_ID, SRV_API_ID, PRD_VERSION, SRV_VERSION_ID, CREATE_TIME, 
+    UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServicePrdlineRelCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sol_service_prdline_rel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart&gt;=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sol_service_prdline_rel
+    where SRV_PRDLINE_ID = #{srvPrdlineId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sol_service_prdline_rel
+    where SRV_PRDLINE_ID = #{srvPrdlineId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServicePrdlineRelCriteria">
+    delete from sol_service_prdline_rel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServicePrdlineRel">
+    insert into sol_service_prdline_rel (SRV_PRDLINE_ID, PRDLINE_ID, SRV_API_ID, 
+      PRD_VERSION, SRV_VERSION_ID, CREATE_TIME, 
+      UPDATE_TIME)
+    values (#{srvPrdlineId,jdbcType=VARCHAR}, #{prdlineId,jdbcType=VARCHAR}, #{srvApiId,jdbcType=VARCHAR}, 
+      #{prdVersion,jdbcType=VARCHAR}, #{srvVersionId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServicePrdlineRel">
+    insert into sol_service_prdline_rel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="srvPrdlineId != null">
+        SRV_PRDLINE_ID,
+      </if>
+      <if test="prdlineId != null">
+        PRDLINE_ID,
+      </if>
+      <if test="srvApiId != null">
+        SRV_API_ID,
+      </if>
+      <if test="prdVersion != null">
+        PRD_VERSION,
+      </if>
+      <if test="srvVersionId != null">
+        SRV_VERSION_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="srvPrdlineId != null">
+        #{srvPrdlineId,jdbcType=VARCHAR},
+      </if>
+      <if test="prdlineId != null">
+        #{prdlineId,jdbcType=VARCHAR},
+      </if>
+      <if test="srvApiId != null">
+        #{srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="prdVersion != null">
+        #{prdVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="srvVersionId != null">
+        #{srvVersionId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServicePrdlineRelCriteria" resultType="java.lang.Integer">
+    select count(*) from sol_service_prdline_rel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sol_service_prdline_rel
+    <set>
+      <if test="record.srvPrdlineId != null">
+        SRV_PRDLINE_ID = #{record.srvPrdlineId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdlineId != null">
+        PRDLINE_ID = #{record.prdlineId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvApiId != null">
+        SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdVersion != null">
+        PRD_VERSION = #{record.prdVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srvVersionId != null">
+        SRV_VERSION_ID = #{record.srvVersionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sol_service_prdline_rel
+    set SRV_PRDLINE_ID = #{record.srvPrdlineId,jdbcType=VARCHAR},
+      PRDLINE_ID = #{record.prdlineId,jdbcType=VARCHAR},
+      SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
+      PRD_VERSION = #{record.prdVersion,jdbcType=VARCHAR},
+      SRV_VERSION_ID = #{record.srvVersionId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServicePrdlineRel">
+    update sol_service_prdline_rel
+    <set>
+      <if test="prdlineId != null">
+        PRDLINE_ID = #{prdlineId,jdbcType=VARCHAR},
+      </if>
+      <if test="srvApiId != null">
+        SRV_API_ID = #{srvApiId,jdbcType=VARCHAR},
+      </if>
+      <if test="prdVersion != null">
+        PRD_VERSION = #{prdVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="srvVersionId != null">
+        SRV_VERSION_ID = #{srvVersionId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SRV_PRDLINE_ID = #{srvPrdlineId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServicePrdlineRel">
+    update sol_service_prdline_rel
+    set PRDLINE_ID = #{prdlineId,jdbcType=VARCHAR},
+      SRV_API_ID = #{srvApiId,jdbcType=VARCHAR},
+      PRD_VERSION = #{prdVersion,jdbcType=VARCHAR},
+      SRV_VERSION_ID = #{srvVersionId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where SRV_PRDLINE_ID = #{srvPrdlineId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,48 @@
+dependencies {
+    compile project(":sol-api")
+
+    compile 'org.mybatis:mybatis:3.3.0'
+    compile 'org.mybatis:mybatis-spring:1.2.3'
+    compile 'mysql:mysql-connector-java:5.1.36'
+    compile 'org.springframework:spring-tx:4.1.7.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.1.7.RELEASE'
+    compile 'org.springframework:spring-context-support:4.1.7.RELEASE'
+	compile 'org.springframework:spring-expression:4.1.7.RELEASE'
+	compile 'org.springframework:spring-core:4.1.7.RELEASE'
+	compile 'org.springframework:spring-context:4.1.7.RELEASE'
+	compile 'org.springframework:spring-beans:4.1.7.RELEASE'
+	compile 'org.springframework:spring-webmvc:4.1.7.RELEASE'
+	compile ("com.101tec:zkclient:0.4") {
+		exclude group: 'org.apache.zookeeper', module: 'zookeeper'
+		exclude group: 'log4j', module: 'log4j'
+	}
+	compile "org.apache.zookeeper:zookeeper:3.4.6"
+    compile 'org.apache.curator:curator-framework:2.8.0'
+    compile 'org.apache.curator:curator-recipes:2.8.0'
+    compile "org.apache.zookeeper:zookeeper:3.4.6"
+	compile "org.javassist:javassist:3.15.0-GA"    
+	compile 'org.elasticsearch:elasticsearch:1.6.2'
+	compile	'org.apache.commons:commons-email:1.4'
+	compile 'org.dom4j:dom4j:1.6.1'
+	compile 'org.quartz-scheduler:quartz:2.2.1'
+	
+
+	compile 'org.apache.commons:commons-compress:1.9'
+	
+	//compile 'com.ai.runner.util:runner-util:1.0.5-SNAPSHOT'
+
+    compile 'com.ai.runner.plugin:apicollector:2.0-SNAPSHOT'
+    
+    
+    //opt-sdk
+   compile ("com.ai.opt.sdk:opt-sdk:2.1-SNAPSHOT") {
+		exclude group: 'com.ai'
+	}
+  
+   compile fileTree(dir:'lib',include:'**/*.jar')
+	
+    testCompile(
+            "org.springframework:spring-test:4.1.7.RELEASE",
+            "junit:junit:4.12"
+    )
+}

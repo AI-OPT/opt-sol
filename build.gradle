@@ -1,0 +1,124 @@
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'maven-publish'
+
+    ext {        
+        moduleVersion = "2.0-SNAPSHOT"
+        runnerBaseVersion = "1.0-SNAPSHOT"
+        optBaseVersion = "1.0.1-SNAPSHOT"
+        builtBy = "gradle 2.2"
+        publishUserName = "runnerdev"
+        publishUserPassword = "runnerdev"
+        publishURL = "http://10.1.228.199:18081/nexus/content/repositories/snapshots/"
+        
+        mavenPublicURL = "http://10.1.228.199:18081/nexus/content/groups/public/"
+    }
+
+    compileJava.dependsOn clean
+    sourceCompatibility = 1.7
+
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
+    group="com.ai.opt.sol"
+}
+
+subprojects {
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+    repositories {
+        maven { url mavenPublicURL }
+    }
+    
+    sourceSets {
+        main {
+            java {
+                srcDirs = [
+                    'src/main/java'
+                ]
+            }
+            resources { srcDirs = ['src/main/resources']}
+        }
+    }
+
+    dependencies {
+    	compile "com.ai.opt:opt-base:${optBaseVersion}"
+    	//compile "com.ai.runner:runner-base:${runnerBaseVersion}"
+    	//compile 'org.jboss.resteasy:resteasy-jaxrs:3.0.11.Final'
+	    //compile 'org.jboss.resteasy:resteasy-client:3.0.11.Final'
+	    //compile 'org.jboss.resteasy:resteasy-jackson-provider:3.0.11.Final'
+	    //compile 'org.mortbay.jetty:jetty:6.1.26'
+	    compile 'javax.validation:validation-api:1.1.0.Final'
+	    compile 'javax.ws.rs:javax.ws.rs-api:2.0.1'
+    }
+
+}
+
+project("sol-api") {
+    project.ext {
+        appName = "sol-api"
+        apiDir =  "src/main/java/com/ai/opt/sol/api/"
+    }
+
+    jar {
+        baseName appName
+        version moduleVersion
+        manifest {
+            attributes 'packageName': appName, 'Built-By': builtBy, 'create-date': new Date().format('yyyy-MM-dd HH:mm:ss')
+        }
+    }
+    publish.dependsOn build
+
+}
+
+project("sol-core") {
+    project.ext {
+        appName = "sol-core"
+    }
+
+    jar {
+        baseName appName
+        version moduleVersion
+        include "com/ai/opt/sol/*/**"
+        manifest {
+            attributes 'packageName': appName, 'Built-By': builtBy, 'create-date': new Date().format('yyyy-MM-dd HH:mm:ss')
+        }
+    }
+}
+
+jar {
+    baseName baseName
+    version moduleVersion
+    destinationDir file("$buildDir/m-libs/")
+    manifest {
+        attributes 'packageName': baseName, 'Built-By': builtBy, 'create-date': new Date().format('yyyy-MM-dd HH:mm:ss')
+    }
+}
+
+configure(subprojects) { subproject ->
+    task sourcesJar(type: Jar, dependsOn:classes) { from sourceSets.main.output }
+    artifacts { archives sourcesJar }
+}
+task copySubProjectsJar(type: Copy) {
+    subprojects.each { subproject ->
+        from subproject.jar
+        destinationDir file("$buildDir/libs/core-libs")
+    }
+}
+task copy3rdJars(type: Copy) {
+    subprojects.each { subproject ->
+        from subproject.configurations.runtime
+        exclude "sol-api-*.*"
+        destinationDir file("$buildDir/libs/3rd-libs")
+    }
+}
+
+task copySubProjectsConfig(type: Copy) {
+    subprojects.each { subproject ->
+        from subproject.fileTree(dir: 'src/main/resources')
+        destinationDir file("$buildDir/config")
+    }
+}
+
+build.dependsOn copySubProjectsJar,copy3rdJars,copySubProjectsConfig

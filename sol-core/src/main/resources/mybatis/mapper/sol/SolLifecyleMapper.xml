@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.opt.sol.dao.mapper.interfaces.SolLifecyleMapper">
+  <resultMap id="BaseResultMap" type="com.ai.opt.sol.dao.mapper.bo.SolLifecyle">
+    <id column="SERVICE_GLOBAL_ID" jdbcType="VARCHAR" property="serviceGlobalId" />
+    <result column="PRODUCTLINE_ID" jdbcType="VARCHAR" property="productlineId" />
+    <result column="CATEGORY_ID" jdbcType="VARCHAR" property="categoryId" />
+    <result column="SERVICE_API_CODE" jdbcType="VARCHAR" property="serviceApiCode" />
+    <result column="SERVICE_API_NAME" jdbcType="VARCHAR" property="serviceApiName" />
+    <result column="SERVICE_REMARK" jdbcType="VARCHAR" property="serviceRemark" />
+    <result column="SERVICE_REQ_DOC_URL" jdbcType="VARCHAR" property="serviceReqDocUrl" />
+    <result column="SERVICE_PROTOTYPE_DOC_URL" jdbcType="VARCHAR" property="servicePrototypeDocUrl" />
+    <result column="SERVICE_DESIGN_DOC_URL" jdbcType="VARCHAR" property="serviceDesignDocUrl" />
+    <result column="SERVICE_OL_TEST_URL" jdbcType="VARCHAR" property="serviceOlTestUrl" />
+    <result column="SERVICE_TEST_DOC_URL" jdbcType="VARCHAR" property="serviceTestDocUrl" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="SERVICE_STATE" jdbcType="VARCHAR" property="serviceState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SERVICE_GLOBAL_ID, PRODUCTLINE_ID, CATEGORY_ID, SERVICE_API_CODE, SERVICE_API_NAME, 
+    SERVICE_REMARK, SERVICE_REQ_DOC_URL, SERVICE_PROTOTYPE_DOC_URL, SERVICE_DESIGN_DOC_URL, 
+    SERVICE_OL_TEST_URL, SERVICE_TEST_DOC_URL, CREATE_TIME, UPDATE_TIME, SERVICE_STATE
+  </sql>
+  <select id="selectByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolLifecyleCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sol_lifecyle
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart != null and limitStart&gt;=0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sol_lifecyle
+    where SERVICE_GLOBAL_ID = #{serviceGlobalId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sol_lifecyle
+    where SERVICE_GLOBAL_ID = #{serviceGlobalId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolLifecyleCriteria">
+    delete from sol_lifecyle
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.opt.sol.dao.mapper.bo.SolLifecyle">
+    insert into sol_lifecyle (SERVICE_GLOBAL_ID, PRODUCTLINE_ID, CATEGORY_ID, 
+      SERVICE_API_CODE, SERVICE_API_NAME, SERVICE_REMARK, 
+      SERVICE_REQ_DOC_URL, SERVICE_PROTOTYPE_DOC_URL, 
+      SERVICE_DESIGN_DOC_URL, SERVICE_OL_TEST_URL, 
+      SERVICE_TEST_DOC_URL, CREATE_TIME, UPDATE_TIME, 
+      SERVICE_STATE)
+    values (#{serviceGlobalId,jdbcType=VARCHAR}, #{productlineId,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR}, 
+      #{serviceApiCode,jdbcType=VARCHAR}, #{serviceApiName,jdbcType=VARCHAR}, #{serviceRemark,jdbcType=VARCHAR}, 
+      #{serviceReqDocUrl,jdbcType=VARCHAR}, #{servicePrototypeDocUrl,jdbcType=VARCHAR}, 
+      #{serviceDesignDocUrl,jdbcType=VARCHAR}, #{serviceOlTestUrl,jdbcType=VARCHAR}, 
+      #{serviceTestDocUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{serviceState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolLifecyle">
+    insert into sol_lifecyle
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serviceGlobalId != null">
+        SERVICE_GLOBAL_ID,
+      </if>
+      <if test="productlineId != null">
+        PRODUCTLINE_ID,
+      </if>
+      <if test="categoryId != null">
+        CATEGORY_ID,
+      </if>
+      <if test="serviceApiCode != null">
+        SERVICE_API_CODE,
+      </if>
+      <if test="serviceApiName != null">
+        SERVICE_API_NAME,
+      </if>
+      <if test="serviceRemark != null">
+        SERVICE_REMARK,
+      </if>
+      <if test="serviceReqDocUrl != null">
+        SERVICE_REQ_DOC_URL,
+      </if>
+      <if test="servicePrototypeDocUrl != null">
+        SERVICE_PROTOTYPE_DOC_URL,
+      </if>
+      <if test="serviceDesignDocUrl != null">
+        SERVICE_DESIGN_DOC_URL,
+      </if>
+      <if test="serviceOlTestUrl != null">
+        SERVICE_OL_TEST_URL,
+      </if>
+      <if test="serviceTestDocUrl != null">
+        SERVICE_TEST_DOC_URL,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="serviceState != null">
+        SERVICE_STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serviceGlobalId != null">
+        #{serviceGlobalId,jdbcType=VARCHAR},
+      </if>
+      <if test="productlineId != null">
+        #{productlineId,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceApiCode != null">
+        #{serviceApiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceApiName != null">
+        #{serviceApiName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceRemark != null">
+        #{serviceRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceReqDocUrl != null">
+        #{serviceReqDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePrototypeDocUrl != null">
+        #{servicePrototypeDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceDesignDocUrl != null">
+        #{serviceDesignDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceOlTestUrl != null">
+        #{serviceOlTestUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceTestDocUrl != null">
+        #{serviceTestDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceState != null">
+        #{serviceState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolLifecyleCriteria" resultType="java.lang.Integer">
+    select count(*) from sol_lifecyle
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sol_lifecyle
+    <set>
+      <if test="record.serviceGlobalId != null">
+        SERVICE_GLOBAL_ID = #{record.serviceGlobalId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productlineId != null">
+        PRODUCTLINE_ID = #{record.productlineId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null">
+        CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceApiCode != null">
+        SERVICE_API_CODE = #{record.serviceApiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceApiName != null">
+        SERVICE_API_NAME = #{record.serviceApiName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceRemark != null">
+        SERVICE_REMARK = #{record.serviceRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceReqDocUrl != null">
+        SERVICE_REQ_DOC_URL = #{record.serviceReqDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servicePrototypeDocUrl != null">
+        SERVICE_PROTOTYPE_DOC_URL = #{record.servicePrototypeDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceDesignDocUrl != null">
+        SERVICE_DESIGN_DOC_URL = #{record.serviceDesignDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceOlTestUrl != null">
+        SERVICE_OL_TEST_URL = #{record.serviceOlTestUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceTestDocUrl != null">
+        SERVICE_TEST_DOC_URL = #{record.serviceTestDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.serviceState != null">
+        SERVICE_STATE = #{record.serviceState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sol_lifecyle
+    set SERVICE_GLOBAL_ID = #{record.serviceGlobalId,jdbcType=VARCHAR},
+      PRODUCTLINE_ID = #{record.productlineId,jdbcType=VARCHAR},
+      CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR},
+      SERVICE_API_CODE = #{record.serviceApiCode,jdbcType=VARCHAR},
+      SERVICE_API_NAME = #{record.serviceApiName,jdbcType=VARCHAR},
+      SERVICE_REMARK = #{record.serviceRemark,jdbcType=VARCHAR},
+      SERVICE_REQ_DOC_URL = #{record.serviceReqDocUrl,jdbcType=VARCHAR},
+      SERVICE_PROTOTYPE_DOC_URL = #{record.servicePrototypeDocUrl,jdbcType=VARCHAR},
+      SERVICE_DESIGN_DOC_URL = #{record.serviceDesignDocUrl,jdbcType=VARCHAR},
+      SERVICE_OL_TEST_URL = #{record.serviceOlTestUrl,jdbcType=VARCHAR},
+      SERVICE_TEST_DOC_URL = #{record.serviceTestDocUrl,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      SERVICE_STATE = #{record.serviceState,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolLifecyle">
+    update sol_lifecyle
+    <set>
+      <if test="productlineId != null">
+        PRODUCTLINE_ID = #{productlineId,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceApiCode != null">
+        SERVICE_API_CODE = #{serviceApiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceApiName != null">
+        SERVICE_API_NAME = #{serviceApiName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceRemark != null">
+        SERVICE_REMARK = #{serviceRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceReqDocUrl != null">
+        SERVICE_REQ_DOC_URL = #{serviceReqDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="servicePrototypeDocUrl != null">
+        SERVICE_PROTOTYPE_DOC_URL = #{servicePrototypeDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceDesignDocUrl != null">
+        SERVICE_DESIGN_DOC_URL = #{serviceDesignDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceOlTestUrl != null">
+        SERVICE_OL_TEST_URL = #{serviceOlTestUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceTestDocUrl != null">
+        SERVICE_TEST_DOC_URL = #{serviceTestDocUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceState != null">
+        SERVICE_STATE = #{serviceState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SERVICE_GLOBAL_ID = #{serviceGlobalId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.opt.sol.dao.mapper.bo.SolLifecyle">
+    update sol_lifecyle
+    set PRODUCTLINE_ID = #{productlineId,jdbcType=VARCHAR},
+      CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+      SERVICE_API_CODE = #{serviceApiCode,jdbcType=VARCHAR},
+      SERVICE_API_NAME = #{serviceApiName,jdbcType=VARCHAR},
+      SERVICE_REMARK = #{serviceRemark,jdbcType=VARCHAR},
+      SERVICE_REQ_DOC_URL = #{serviceReqDocUrl,jdbcType=VARCHAR},
+      SERVICE_PROTOTYPE_DOC_URL = #{servicePrototypeDocUrl,jdbcType=VARCHAR},
+      SERVICE_DESIGN_DOC_URL = #{serviceDesignDocUrl,jdbcType=VARCHAR},
+      SERVICE_OL_TEST_URL = #{serviceOlTestUrl,jdbcType=VARCHAR},
+      SERVICE_TEST_DOC_URL = #{serviceTestDocUrl,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      SERVICE_STATE = #{serviceState,jdbcType=VARCHAR}
+    where SERVICE_GLOBAL_ID = #{serviceGlobalId,jdbcType=VARCHAR}
+  </update>
+</mapper>
