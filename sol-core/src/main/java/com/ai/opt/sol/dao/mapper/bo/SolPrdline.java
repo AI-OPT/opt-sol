@@ -7,6 +7,8 @@ public class SolPrdline {
 
     private String prdlineName;
 
+    private String prdlineCode;
+
     private String prdlineRemark;
 
     private Timestamp createTime;
@@ -31,6 +33,14 @@ public class SolPrdline {
 
     public void setPrdlineName(String prdlineName) {
         this.prdlineName = prdlineName == null ? null : prdlineName.trim();
+    }
+
+    public String getPrdlineCode() {
+        return prdlineCode;
+    }
+
+    public void setPrdlineCode(String prdlineCode) {
+        this.prdlineCode = prdlineCode == null ? null : prdlineCode.trim();
     }
 
     public String getPrdlineRemark() {

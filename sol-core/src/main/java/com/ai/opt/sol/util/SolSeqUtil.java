@@ -11,7 +11,8 @@ public final class SolSeqUtil {
 	 * @return
 	 */
 	public static String getPrdlineId(){
-		return SeqUtil.getNewId(SEQ.SOL_PRDLINE_ID_SEQ,10);
+		return SeqUtil.getNewId(SEQ.SOL_PRDLINE_ID_SEQ,1);
+
 	}
 	/**
 	 * 获取定义服务的id

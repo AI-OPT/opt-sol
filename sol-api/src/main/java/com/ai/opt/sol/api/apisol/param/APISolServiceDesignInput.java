@@ -1,4 +1,4 @@
-package com.ai.opt.sol.api.apisearch.param;
+package com.ai.opt.sol.api.apisol.param;
 
 import java.io.Serializable;
 

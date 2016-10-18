@@ -1,4 +1,4 @@
-package com.ai.opt.sol.api.apisearch;
+package com.ai.opt.sol.api.apisol;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -9,43 +9,14 @@ import javax.ws.rs.core.MediaType;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
-import com.ai.opt.sol.api.apisearch.param.APISolPrdline;
-import com.ai.opt.sol.api.apisearch.param.APISolServiceDefine;
-import com.ai.opt.sol.api.apisearch.param.APISolServiceDesignInput;
-import com.ai.opt.sol.api.apisearch.param.APISolServiceDesignOutput;
+import com.ai.opt.sol.api.apisol.param.APISolServiceDesignInput;
+import com.ai.opt.sol.api.apisol.param.APISolServiceDesignOutput;
+import com.ai.opt.sol.api.apisol.param.APISolServiceQueryResult;
 
 @Path("/SOLFun")
 @Consumes({ MediaType.APPLICATION_JSON })
 @Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
-public interface ISolSV {
-    /**
-     * 新建产品线接口
-     * 
-     * @param solPrdline
-     * @return BaseResponse
-     * @throws BusinessException
-	 * @throws SystemException
-     * @author biancx
-     * @ApiDocMethod
-     */
-	@POST
-	@Path("/createSolPrdline")
-	BaseResponse createSolPrdline(APISolPrdline solPrdline) throws BusinessException,SystemException;
-	
-	/**
-	 * 定义服务接口
-     * 
-     * @param solServiceDefine
-     * @return BaseResponse
-     * @throws BusinessException
-	 * @throws SystemException
-     * @author biancx
-     * @ApiDocMethod
-     */
-	@POST
-	@Path("/createSolService")
-	BaseResponse createSolService(APISolServiceDefine solServiceDefine) throws BusinessException,SystemException;
-	
+public interface ISolServiceParamSV {
 	/**
 	 * 定义服务入参接口
     * 
@@ -74,4 +45,16 @@ public interface ISolSV {
 	@Path("/designServiceOutput")
 	BaseResponse designServiceOutput(APISolServiceDesignOutput solServiceDesignOutput) throws BusinessException,SystemException;
 	
+	/**
+	* 查询服务信息
+	* @param srvApiId
+    * @return APISolServiceQueryResult
+    * @throws BusinessException
+	* @throws SystemException
+    * @author biancx
+    * @ApiDocMethod
+	 */
+	@POST
+	@Path("/queryService")
+	APISolServiceQueryResult designServiceQuery(String srvApiId) throws BusinessException,SystemException;
 }

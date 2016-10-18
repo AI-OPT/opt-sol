@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ai.opt.sdk.util.DateUtil;
-import com.ai.opt.sol.api.apisearch.param.APISolPrdline;
+import com.ai.opt.sol.api.apisol.param.APISolPrdline;
 import com.ai.opt.sol.business.interfaces.IPrdlineBussiness;
-import com.ai.opt.sol.dao.interfaces.SolPrdlineMapper;
+import com.ai.opt.sol.dao.mapper.interfaces.SolPrdlineMapper;
 import com.ai.opt.sol.dao.mapper.bo.SolPrdline;
 
 @Service
@@ -25,6 +25,7 @@ public class IPrdlineBussinessImpl implements IPrdlineBussiness{
 		solPrdline.setPrdlineName(prdline.getPrdlineName());
 		solPrdline.setPrdlineRemark(prdline.getPrdlineRemark());
 		solPrdline.setUpdateTime(DateUtil.getTimestamp(prdline.getUpdateTime(), DateUtil.YYYYMMDDHHMMSS));
+		solPrdline.setPrdlineCode(prdline.getPrdlineCode());
 		solPrdlineMapper.insert(solPrdline);
 	}
 

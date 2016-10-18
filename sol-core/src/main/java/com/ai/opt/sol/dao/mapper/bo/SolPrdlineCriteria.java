@@ -265,6 +265,76 @@ public class SolPrdlineCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andPrdlineCodeIsNull() {
+            addCriterion("PRDLINE_CODE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeIsNotNull() {
+            addCriterion("PRDLINE_CODE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeEqualTo(String value) {
+            addCriterion("PRDLINE_CODE =", value, "prdlineCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeNotEqualTo(String value) {
+            addCriterion("PRDLINE_CODE <>", value, "prdlineCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeGreaterThan(String value) {
+            addCriterion("PRDLINE_CODE >", value, "prdlineCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("PRDLINE_CODE >=", value, "prdlineCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeLessThan(String value) {
+            addCriterion("PRDLINE_CODE <", value, "prdlineCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeLessThanOrEqualTo(String value) {
+            addCriterion("PRDLINE_CODE <=", value, "prdlineCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeLike(String value) {
+            addCriterion("PRDLINE_CODE like", value, "prdlineCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeNotLike(String value) {
+            addCriterion("PRDLINE_CODE not like", value, "prdlineCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeIn(List<String> values) {
+            addCriterion("PRDLINE_CODE in", values, "prdlineCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeNotIn(List<String> values) {
+            addCriterion("PRDLINE_CODE not in", values, "prdlineCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeBetween(String value1, String value2) {
+            addCriterion("PRDLINE_CODE between", value1, value2, "prdlineCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrdlineCodeNotBetween(String value1, String value2) {
+            addCriterion("PRDLINE_CODE not between", value1, value2, "prdlineCode");
+            return (Criteria) this;
+        }
+
         public Criteria andPrdlineRemarkIsNull() {
             addCriterion("PRDLINE_REMARK is null");
             return (Criteria) this;

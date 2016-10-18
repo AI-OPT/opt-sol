@@ -1,34 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ai.opt.sol.dao.mapper.interfaces.SolPrdlineMapper">
-  <resultMap id="BaseResultMap" type="com.ai.opt.sol.dao.mapper.bo.SolPrdline">
-    <id column="PRDLINE_ID" jdbcType="VARCHAR" property="prdlineId" />
-    <result column="PRDLINE_NAME" jdbcType="VARCHAR" property="prdlineName" />
-    <result column="PRDLINE_REMARK" jdbcType="VARCHAR" property="prdlineRemark" />
-    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="PRDLINE_MANAGER" jdbcType="VARCHAR" property="prdlineManager" />
-    <result column="INDUSTRY_CODE" jdbcType="VARCHAR" property="industryCode" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.opt.sol.dao.mapper.interfaces.SolPrdlineMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.opt.sol.dao.mapper.bo.SolPrdline" >
+    <id column="PRDLINE_ID" property="prdlineId" jdbcType="VARCHAR" />
+    <result column="PRDLINE_NAME" property="prdlineName" jdbcType="VARCHAR" />
+    <result column="PRDLINE_CODE" property="prdlineCode" jdbcType="VARCHAR" />
+    <result column="PRDLINE_REMARK" property="prdlineRemark" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="PRDLINE_MANAGER" property="prdlineManager" jdbcType="VARCHAR" />
+    <result column="INDUSTRY_CODE" property="industryCode" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -39,25 +40,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -68,176 +69,190 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
-    PRDLINE_ID, PRDLINE_NAME, PRDLINE_REMARK, CREATE_TIME, UPDATE_TIME, PRDLINE_MANAGER, 
-    INDUSTRY_CODE
+  <sql id="Base_Column_List" >
+    PRDLINE_ID, PRDLINE_NAME, PRDLINE_CODE, PRDLINE_REMARK, CREATE_TIME, UPDATE_TIME, 
+    PRDLINE_MANAGER, INDUSTRY_CODE
   </sql>
-  <select id="selectByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineCriteria" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineCriteria" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
     from sol_prdline
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
-    <if test="limitStart != null and limitStart&gt;=0">
+    <if test="limitStart != null and limitStart>=0" >
       limit #{limitStart} , #{limitEnd}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from sol_prdline
     where PRDLINE_ID = #{prdlineId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from sol_prdline
     where PRDLINE_ID = #{prdlineId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineCriteria">
+  <delete id="deleteByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineCriteria" >
     delete from sol_prdline
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdline">
-    insert into sol_prdline (PRDLINE_ID, PRDLINE_NAME, PRDLINE_REMARK, 
-      CREATE_TIME, UPDATE_TIME, PRDLINE_MANAGER, 
-      INDUSTRY_CODE)
-    values (#{prdlineId,jdbcType=VARCHAR}, #{prdlineName,jdbcType=VARCHAR}, #{prdlineRemark,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{prdlineManager,jdbcType=VARCHAR}, 
-      #{industryCode,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdline" >
+    insert into sol_prdline (PRDLINE_ID, PRDLINE_NAME, PRDLINE_CODE, 
+      PRDLINE_REMARK, CREATE_TIME, UPDATE_TIME, 
+      PRDLINE_MANAGER, INDUSTRY_CODE)
+    values (#{prdlineId,jdbcType=VARCHAR}, #{prdlineName,jdbcType=VARCHAR}, #{prdlineCode,jdbcType=VARCHAR}, 
+      #{prdlineRemark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{prdlineManager,jdbcType=VARCHAR}, #{industryCode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdline">
+  <insert id="insertSelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdline" >
     insert into sol_prdline
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="prdlineId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prdlineId != null" >
         PRDLINE_ID,
       </if>
-      <if test="prdlineName != null">
+      <if test="prdlineName != null" >
         PRDLINE_NAME,
       </if>
-      <if test="prdlineRemark != null">
+      <if test="prdlineCode != null" >
+        PRDLINE_CODE,
+      </if>
+      <if test="prdlineRemark != null" >
         PRDLINE_REMARK,
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         CREATE_TIME,
       </if>
-      <if test="updateTime != null">
+      <if test="updateTime != null" >
         UPDATE_TIME,
       </if>
-      <if test="prdlineManager != null">
+      <if test="prdlineManager != null" >
         PRDLINE_MANAGER,
       </if>
-      <if test="industryCode != null">
+      <if test="industryCode != null" >
         INDUSTRY_CODE,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="prdlineId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prdlineId != null" >
         #{prdlineId,jdbcType=VARCHAR},
       </if>
-      <if test="prdlineName != null">
+      <if test="prdlineName != null" >
         #{prdlineName,jdbcType=VARCHAR},
       </if>
-      <if test="prdlineRemark != null">
+      <if test="prdlineCode != null" >
+        #{prdlineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prdlineRemark != null" >
         #{prdlineRemark,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
+      <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="prdlineManager != null">
+      <if test="prdlineManager != null" >
         #{prdlineManager,jdbcType=VARCHAR},
       </if>
-      <if test="industryCode != null">
+      <if test="industryCode != null" >
         #{industryCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineCriteria" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineCriteria" resultType="java.lang.Integer" >
     select count(*) from sol_prdline
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update sol_prdline
-    <set>
-      <if test="record.prdlineId != null">
+    <set >
+      <if test="record.prdlineId != null" >
         PRDLINE_ID = #{record.prdlineId,jdbcType=VARCHAR},
       </if>
-      <if test="record.prdlineName != null">
+      <if test="record.prdlineName != null" >
         PRDLINE_NAME = #{record.prdlineName,jdbcType=VARCHAR},
       </if>
-      <if test="record.prdlineRemark != null">
+      <if test="record.prdlineCode != null" >
+        PRDLINE_CODE = #{record.prdlineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prdlineRemark != null" >
         PRDLINE_REMARK = #{record.prdlineRemark,jdbcType=VARCHAR},
       </if>
-      <if test="record.createTime != null">
+      <if test="record.createTime != null" >
         CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.updateTime != null">
+      <if test="record.updateTime != null" >
         UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.prdlineManager != null">
+      <if test="record.prdlineManager != null" >
         PRDLINE_MANAGER = #{record.prdlineManager,jdbcType=VARCHAR},
       </if>
-      <if test="record.industryCode != null">
+      <if test="record.industryCode != null" >
         INDUSTRY_CODE = #{record.industryCode,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update sol_prdline
     set PRDLINE_ID = #{record.prdlineId,jdbcType=VARCHAR},
       PRDLINE_NAME = #{record.prdlineName,jdbcType=VARCHAR},
+      PRDLINE_CODE = #{record.prdlineCode,jdbcType=VARCHAR},
       PRDLINE_REMARK = #{record.prdlineRemark,jdbcType=VARCHAR},
       CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
       UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
       PRDLINE_MANAGER = #{record.prdlineManager,jdbcType=VARCHAR},
       INDUSTRY_CODE = #{record.industryCode,jdbcType=VARCHAR}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdline">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdline" >
     update sol_prdline
-    <set>
-      <if test="prdlineName != null">
+    <set >
+      <if test="prdlineName != null" >
         PRDLINE_NAME = #{prdlineName,jdbcType=VARCHAR},
       </if>
-      <if test="prdlineRemark != null">
+      <if test="prdlineCode != null" >
+        PRDLINE_CODE = #{prdlineCode,jdbcType=VARCHAR},
+      </if>
+      <if test="prdlineRemark != null" >
         PRDLINE_REMARK = #{prdlineRemark,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
+      <if test="updateTime != null" >
         UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="prdlineManager != null">
+      <if test="prdlineManager != null" >
         PRDLINE_MANAGER = #{prdlineManager,jdbcType=VARCHAR},
       </if>
-      <if test="industryCode != null">
+      <if test="industryCode != null" >
         INDUSTRY_CODE = #{industryCode,jdbcType=VARCHAR},
       </if>
     </set>
     where PRDLINE_ID = #{prdlineId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdline">
+  <update id="updateByPrimaryKey" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdline" >
     update sol_prdline
     set PRDLINE_NAME = #{prdlineName,jdbcType=VARCHAR},
+      PRDLINE_CODE = #{prdlineCode,jdbcType=VARCHAR},
       PRDLINE_REMARK = #{prdlineRemark,jdbcType=VARCHAR},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},

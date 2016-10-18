@@ -54,7 +54,7 @@
     
     <!-- 扫描注解dao -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    	<property name="basePackage" value="com.ai.opt.sol.dao.interfaces"/>
+    	<property name="basePackage" value="com.ai.opt.sol.dao.mapper.interfaces"/>
     	<property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
     </bean>
     

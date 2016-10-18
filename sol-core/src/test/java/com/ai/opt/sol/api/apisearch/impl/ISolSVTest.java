@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.ai.opt.sol.api.apisearch.ISolSV;
-import com.ai.opt.sol.api.apisearch.param.APISolPrdline;
+import com.ai.opt.sol.api.apisol.ISolPrdlineSV;
+import com.ai.opt.sol.api.apisol.param.APISolPrdline;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "/context/core-context.xml" })
 public class ISolSVTest {
 	@Autowired
-	private ISolSV iSolSv;
+	private ISolPrdlineSV iSolSv;
 	@Test
 	public void insertSolPrdlineTest(){
 		APISolPrdline solPrdline=new APISolPrdline();

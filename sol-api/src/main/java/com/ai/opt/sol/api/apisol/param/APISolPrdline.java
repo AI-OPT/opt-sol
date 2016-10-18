@@ -1,4 +1,4 @@
-package com.ai.opt.sol.api.apisearch.param;
+package com.ai.opt.sol.api.apisol.param;
 
 import java.io.Serializable;
 
@@ -39,6 +39,12 @@ public class APISolPrdline implements Serializable{
 	 */
 	private String prdlineCode;
 	
+	public String getPrdlineCode() {
+		return prdlineCode;
+	}
+	public void setPrdlineCode(String prdlineCode) {
+		this.prdlineCode = prdlineCode;
+	}
 	public String getPrdlineName() {
 		return prdlineName;
 	}
