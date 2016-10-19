@@ -1,5 +1,8 @@
 package com.ai.opt.sol.api.apisol.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +12,14 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.ResponseHeader;
+import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sol.api.apisol.ISolPrdlineSV;
 import com.ai.opt.sol.api.apisol.param.APISolPrdline;
 import com.ai.opt.sol.api.apisol.param.APISolPrdlineQuery;
 import com.ai.opt.sol.business.interfaces.IPrdlineBussiness;
+import com.ai.opt.sol.dao.mapper.bo.SolPrdline;
+import com.ai.opt.sol.dao.mapper.bo.SolPrdlineCriteria;
 import com.ai.opt.sol.util.SolSeqUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 
@@ -32,7 +38,6 @@ public class SolPrdlineImpl implements ISolPrdlineSV{
 				String prdlineId=null;
 				//此时用来获取产品线id；
 				prdlineId=SolSeqUtil.getPrdlineId();
-				//prdlineId="1";
 				if(StringUtil.isBlank(prdlineId)){
 					 throw new BusinessException("000001","prdlineId不能为空");
 				}
@@ -57,15 +62,46 @@ public class SolPrdlineImpl implements ISolPrdlineSV{
 
 
 	@Override
-	public APISolPrdline querySolPrdlineNameCode(APISolPrdlineQuery solPrdlineQuery) throws BusinessException, SystemException {
-		
-		return null;
+	public List<APISolPrdline> querySolPrdlineNameCode(APISolPrdlineQuery solPrdlineQuery) throws BusinessException, SystemException {
+		List<SolPrdline> solPrdlines=prdlineBussiness.queryPrdlineName(solPrdlineQuery);
+		List<APISolPrdline> apiSolPrdlines=new ArrayList<APISolPrdline>();
+		for(SolPrdline solPrdline:solPrdlines){
+			APISolPrdline apiSolPrdline=new APISolPrdline();
+			apiSolPrdline.setCreateTime(DateUtil.getDateString(solPrdline.getCreateTime(), DateUtil.YYYYMMDDHHMMSS));
+			apiSolPrdline.setIndustryCode(solPrdline.getIndustryCode());
+			apiSolPrdline.setPrdlineCode(solPrdline.getPrdlineCode());
+			apiSolPrdline.setPrdlineId(solPrdline.getPrdlineId());
+			apiSolPrdline.setPrdlineManager(solPrdline.getPrdlineManager());
+			apiSolPrdline.setPrdlineName(solPrdline.getPrdlineName());
+			apiSolPrdline.setPrdlineRemark(solPrdline.getPrdlineRemark());
+			apiSolPrdline.setUpdateTime(DateUtil.getDateString(solPrdline.getUpdateTime(), DateUtil.YYYYMMDDHHMMSS));
+			apiSolPrdlines.add(apiSolPrdline);
+		}
+		return apiSolPrdlines;
 	}
 
 	@Override
-	public APISolPrdline querySolPrdlineId(String PrdlineId) throws BusinessException, SystemException {
-		
-		return null;
+	public List<APISolPrdline> querySolPrdlineId(String PrdlineId) throws BusinessException, SystemException {
+		List<APISolPrdline> apiSolPrdlines=new ArrayList<APISolPrdline>();
+		try{
+			List<SolPrdline> solPrdlines=prdlineBussiness.queryPrdlineId(PrdlineId);
+			for(SolPrdline solPrdline:solPrdlines){
+				APISolPrdline apiSolPrdline=new APISolPrdline();
+				apiSolPrdline.setCreateTime(DateUtil.getDateString(solPrdline.getCreateTime(), DateUtil.YYYYMMDDHHMMSS));
+				apiSolPrdline.setIndustryCode(solPrdline.getIndustryCode());
+				apiSolPrdline.setPrdlineCode(solPrdline.getPrdlineCode());
+				apiSolPrdline.setPrdlineId(solPrdline.getPrdlineId());
+				apiSolPrdline.setPrdlineManager(solPrdline.getPrdlineManager());
+				apiSolPrdline.setPrdlineName(solPrdline.getPrdlineName());
+				apiSolPrdline.setPrdlineRemark(solPrdline.getPrdlineRemark());
+				apiSolPrdline.setUpdateTime(DateUtil.getDateString(solPrdline.getUpdateTime(), DateUtil.YYYYMMDDHHMMSS));
+				apiSolPrdlines.add(apiSolPrdline);
+			}
+		}catch(BusinessException e){
+			 LOG.error("查询产品线数据格式失败",e);
+	         throw e;
+		}
+		return apiSolPrdlines;
 	}
 
 }

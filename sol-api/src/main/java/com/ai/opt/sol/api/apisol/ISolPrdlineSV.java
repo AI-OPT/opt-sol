@@ -1,5 +1,7 @@
 package com.ai.opt.sol.api.apisol;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -44,7 +46,7 @@ public interface ISolPrdlineSV {
 	 */
 	@POST
 	@Path("/querySolPrdlineNameCode")
-	APISolPrdline querySolPrdlineNameCode(APISolPrdlineQuery solPrdlineQuery) throws BusinessException,SystemException;
+	List<APISolPrdline> querySolPrdlineNameCode(APISolPrdlineQuery solPrdlineQuery) throws BusinessException,SystemException;
 	
 	/**
 	 * 根据产品线id查询
@@ -57,6 +59,6 @@ public interface ISolPrdlineSV {
 	 */
 	@POST
 	@Path("/querySolPrdlineId")
-	APISolPrdline querySolPrdlineId(String PrdlineId) throws BusinessException,SystemException;
+	List<APISolPrdline> querySolPrdlineId(String PrdlineId) throws BusinessException,SystemException;
 	
 }
