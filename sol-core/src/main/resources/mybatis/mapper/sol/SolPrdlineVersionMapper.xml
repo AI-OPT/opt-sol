@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ai.opt.sol.dao.mapper.interfaces.SolServiceVersionMapper" >
-  <resultMap id="BaseResultMap" type="com.ai.opt.sol.dao.mapper.bo.SolServiceVersion" >
-    <id column="SRV_VERSION_ID" property="srvVersionId" jdbcType="VARCHAR" />
-    <result column="SRV_API_ID" property="srvApiId" jdbcType="VARCHAR" />
-    <result column="SRV_VERSION" property="srvVersion" jdbcType="VARCHAR" />
+<mapper namespace="com.ai.opt.sol.dao.mapper.interfaces.SolPrdlineVersionMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.opt.sol.dao.mapper.bo.SolPrdlineVersion" >
+    <id column="PRDLINE_VERSION_ID" property="prdlineVersionId" jdbcType="VARCHAR" />
+    <result column="PRDLINE_ID" property="prdlineId" jdbcType="VARCHAR" />
+    <result column="PRDLINE_VERSION" property="prdlineVersion" jdbcType="VARCHAR" />
     <result column="VERSION_REMARK" property="versionRemark" jdbcType="VARCHAR" />
     <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -67,16 +67,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    SRV_VERSION_ID, SRV_API_ID, SRV_VERSION, VERSION_REMARK, CREATE_TIME
+    PRDLINE_VERSION_ID, PRDLINE_ID, PRDLINE_VERSION, VERSION_REMARK, CREATE_TIME
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersionCriteria" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineVersionCriteria" >
     select
     <if test="distinct" >
       distinct
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from sol_service_version
+    from sol_prdline_version
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,36 +90,36 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from sol_service_version
-    where SRV_VERSION_ID = #{srvVersionId,jdbcType=VARCHAR}
+    from sol_prdline_version
+    where PRDLINE_VERSION_ID = #{prdlineVersionId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from sol_service_version
-    where SRV_VERSION_ID = #{srvVersionId,jdbcType=VARCHAR}
+    delete from sol_prdline_version
+    where PRDLINE_VERSION_ID = #{prdlineVersionId,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersionCriteria" >
-    delete from sol_service_version
+  <delete id="deleteByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineVersionCriteria" >
+    delete from sol_prdline_version
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersion" >
-    insert into sol_service_version (SRV_VERSION_ID, SRV_API_ID, SRV_VERSION, 
+  <insert id="insert" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineVersion" >
+    insert into sol_prdline_version (PRDLINE_VERSION_ID, PRDLINE_ID, PRDLINE_VERSION, 
       VERSION_REMARK, CREATE_TIME)
-    values (#{srvVersionId,jdbcType=VARCHAR}, #{srvApiId,jdbcType=VARCHAR}, #{srvVersion,jdbcType=VARCHAR}, 
+    values (#{prdlineVersionId,jdbcType=VARCHAR}, #{prdlineId,jdbcType=VARCHAR}, #{prdlineVersion,jdbcType=VARCHAR}, 
       #{versionRemark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersion" >
-    insert into sol_service_version
+  <insert id="insertSelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineVersion" >
+    insert into sol_prdline_version
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="srvVersionId != null" >
-        SRV_VERSION_ID,
+      <if test="prdlineVersionId != null" >
+        PRDLINE_VERSION_ID,
       </if>
-      <if test="srvApiId != null" >
-        SRV_API_ID,
+      <if test="prdlineId != null" >
+        PRDLINE_ID,
       </if>
-      <if test="srvVersion != null" >
-        SRV_VERSION,
+      <if test="prdlineVersion != null" >
+        PRDLINE_VERSION,
       </if>
       <if test="versionRemark != null" >
         VERSION_REMARK,
@@ -129,14 +129,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="srvVersionId != null" >
-        #{srvVersionId,jdbcType=VARCHAR},
+      <if test="prdlineVersionId != null" >
+        #{prdlineVersionId,jdbcType=VARCHAR},
       </if>
-      <if test="srvApiId != null" >
-        #{srvApiId,jdbcType=VARCHAR},
+      <if test="prdlineId != null" >
+        #{prdlineId,jdbcType=VARCHAR},
       </if>
-      <if test="srvVersion != null" >
-        #{srvVersion,jdbcType=VARCHAR},
+      <if test="prdlineVersion != null" >
+        #{prdlineVersion,jdbcType=VARCHAR},
       </if>
       <if test="versionRemark != null" >
         #{versionRemark,jdbcType=VARCHAR},
@@ -146,23 +146,23 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersionCriteria" resultType="java.lang.Integer" >
-    select count(*) from sol_service_version
+  <select id="countByExample" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineVersionCriteria" resultType="java.lang.Integer" >
+    select count(*) from sol_prdline_version
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update sol_service_version
+    update sol_prdline_version
     <set >
-      <if test="record.srvVersionId != null" >
-        SRV_VERSION_ID = #{record.srvVersionId,jdbcType=VARCHAR},
+      <if test="record.prdlineVersionId != null" >
+        PRDLINE_VERSION_ID = #{record.prdlineVersionId,jdbcType=VARCHAR},
       </if>
-      <if test="record.srvApiId != null" >
-        SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
+      <if test="record.prdlineId != null" >
+        PRDLINE_ID = #{record.prdlineId,jdbcType=VARCHAR},
       </if>
-      <if test="record.srvVersion != null" >
-        SRV_VERSION = #{record.srvVersion,jdbcType=VARCHAR},
+      <if test="record.prdlineVersion != null" >
+        PRDLINE_VERSION = #{record.prdlineVersion,jdbcType=VARCHAR},
       </if>
       <if test="record.versionRemark != null" >
         VERSION_REMARK = #{record.versionRemark,jdbcType=VARCHAR},
@@ -176,24 +176,24 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update sol_service_version
-    set SRV_VERSION_ID = #{record.srvVersionId,jdbcType=VARCHAR},
-      SRV_API_ID = #{record.srvApiId,jdbcType=VARCHAR},
-      SRV_VERSION = #{record.srvVersion,jdbcType=VARCHAR},
+    update sol_prdline_version
+    set PRDLINE_VERSION_ID = #{record.prdlineVersionId,jdbcType=VARCHAR},
+      PRDLINE_ID = #{record.prdlineId,jdbcType=VARCHAR},
+      PRDLINE_VERSION = #{record.prdlineVersion,jdbcType=VARCHAR},
       VERSION_REMARK = #{record.versionRemark,jdbcType=VARCHAR},
       CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersion" >
-    update sol_service_version
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineVersion" >
+    update sol_prdline_version
     <set >
-      <if test="srvApiId != null" >
-        SRV_API_ID = #{srvApiId,jdbcType=VARCHAR},
+      <if test="prdlineId != null" >
+        PRDLINE_ID = #{prdlineId,jdbcType=VARCHAR},
       </if>
-      <if test="srvVersion != null" >
-        SRV_VERSION = #{srvVersion,jdbcType=VARCHAR},
+      <if test="prdlineVersion != null" >
+        PRDLINE_VERSION = #{prdlineVersion,jdbcType=VARCHAR},
       </if>
       <if test="versionRemark != null" >
         VERSION_REMARK = #{versionRemark,jdbcType=VARCHAR},
@@ -202,14 +202,14 @@
         CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where SRV_VERSION_ID = #{srvVersionId,jdbcType=VARCHAR}
+    where PRDLINE_VERSION_ID = #{prdlineVersionId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ai.opt.sol.dao.mapper.bo.SolServiceVersion" >
-    update sol_service_version
-    set SRV_API_ID = #{srvApiId,jdbcType=VARCHAR},
-      SRV_VERSION = #{srvVersion,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.ai.opt.sol.dao.mapper.bo.SolPrdlineVersion" >
+    update sol_prdline_version
+    set PRDLINE_ID = #{prdlineId,jdbcType=VARCHAR},
+      PRDLINE_VERSION = #{prdlineVersion,jdbcType=VARCHAR},
       VERSION_REMARK = #{versionRemark,jdbcType=VARCHAR},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
-    where SRV_VERSION_ID = #{srvVersionId,jdbcType=VARCHAR}
+    where PRDLINE_VERSION_ID = #{prdlineVersionId,jdbcType=VARCHAR}
   </update>
 </mapper>

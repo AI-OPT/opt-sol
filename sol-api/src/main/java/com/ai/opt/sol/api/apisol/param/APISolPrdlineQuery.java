@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class APISolPrdlineQuery implements Serializable{
 
-	private static final long serialVersionUID = -6598033693258101349L;
+	private static final long serialVersionUID = -2902555625898671215L;
 	/**
      * 产品线名称
      */
@@ -25,4 +25,5 @@ public class APISolPrdlineQuery implements Serializable{
 	public void setPrdlineCode(String prdlineCode) {
 		this.prdlineCode = prdlineCode;
 	}
+
 }

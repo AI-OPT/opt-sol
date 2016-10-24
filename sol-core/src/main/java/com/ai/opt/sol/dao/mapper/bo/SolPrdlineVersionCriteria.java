@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SolServiceVersionCriteria {
+public class SolPrdlineVersionCriteria {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -15,7 +15,7 @@ public class SolServiceVersionCriteria {
 
     protected Integer limitEnd;
 
-    public SolServiceVersionCriteria() {
+    public SolPrdlineVersionCriteria() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -125,213 +125,213 @@ public class SolServiceVersionCriteria {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andSrvVersionIdIsNull() {
-            addCriterion("SRV_VERSION_ID is null");
+        public Criteria andPrdlineVersionIdIsNull() {
+            addCriterion("PRDLINE_VERSION_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdIsNotNull() {
-            addCriterion("SRV_VERSION_ID is not null");
+        public Criteria andPrdlineVersionIdIsNotNull() {
+            addCriterion("PRDLINE_VERSION_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdEqualTo(String value) {
-            addCriterion("SRV_VERSION_ID =", value, "srvVersionId");
+        public Criteria andPrdlineVersionIdEqualTo(String value) {
+            addCriterion("PRDLINE_VERSION_ID =", value, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdNotEqualTo(String value) {
-            addCriterion("SRV_VERSION_ID <>", value, "srvVersionId");
+        public Criteria andPrdlineVersionIdNotEqualTo(String value) {
+            addCriterion("PRDLINE_VERSION_ID <>", value, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdGreaterThan(String value) {
-            addCriterion("SRV_VERSION_ID >", value, "srvVersionId");
+        public Criteria andPrdlineVersionIdGreaterThan(String value) {
+            addCriterion("PRDLINE_VERSION_ID >", value, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdGreaterThanOrEqualTo(String value) {
-            addCriterion("SRV_VERSION_ID >=", value, "srvVersionId");
+        public Criteria andPrdlineVersionIdGreaterThanOrEqualTo(String value) {
+            addCriterion("PRDLINE_VERSION_ID >=", value, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdLessThan(String value) {
-            addCriterion("SRV_VERSION_ID <", value, "srvVersionId");
+        public Criteria andPrdlineVersionIdLessThan(String value) {
+            addCriterion("PRDLINE_VERSION_ID <", value, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdLessThanOrEqualTo(String value) {
-            addCriterion("SRV_VERSION_ID <=", value, "srvVersionId");
+        public Criteria andPrdlineVersionIdLessThanOrEqualTo(String value) {
+            addCriterion("PRDLINE_VERSION_ID <=", value, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdLike(String value) {
-            addCriterion("SRV_VERSION_ID like", value, "srvVersionId");
+        public Criteria andPrdlineVersionIdLike(String value) {
+            addCriterion("PRDLINE_VERSION_ID like", value, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdNotLike(String value) {
-            addCriterion("SRV_VERSION_ID not like", value, "srvVersionId");
+        public Criteria andPrdlineVersionIdNotLike(String value) {
+            addCriterion("PRDLINE_VERSION_ID not like", value, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdIn(List<String> values) {
-            addCriterion("SRV_VERSION_ID in", values, "srvVersionId");
+        public Criteria andPrdlineVersionIdIn(List<String> values) {
+            addCriterion("PRDLINE_VERSION_ID in", values, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdNotIn(List<String> values) {
-            addCriterion("SRV_VERSION_ID not in", values, "srvVersionId");
+        public Criteria andPrdlineVersionIdNotIn(List<String> values) {
+            addCriterion("PRDLINE_VERSION_ID not in", values, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdBetween(String value1, String value2) {
-            addCriterion("SRV_VERSION_ID between", value1, value2, "srvVersionId");
+        public Criteria andPrdlineVersionIdBetween(String value1, String value2) {
+            addCriterion("PRDLINE_VERSION_ID between", value1, value2, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIdNotBetween(String value1, String value2) {
-            addCriterion("SRV_VERSION_ID not between", value1, value2, "srvVersionId");
+        public Criteria andPrdlineVersionIdNotBetween(String value1, String value2) {
+            addCriterion("PRDLINE_VERSION_ID not between", value1, value2, "prdlineVersionId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdIsNull() {
-            addCriterion("SRV_API_ID is null");
+        public Criteria andPrdlineIdIsNull() {
+            addCriterion("PRDLINE_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdIsNotNull() {
-            addCriterion("SRV_API_ID is not null");
+        public Criteria andPrdlineIdIsNotNull() {
+            addCriterion("PRDLINE_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdEqualTo(String value) {
-            addCriterion("SRV_API_ID =", value, "srvApiId");
+        public Criteria andPrdlineIdEqualTo(String value) {
+            addCriterion("PRDLINE_ID =", value, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdNotEqualTo(String value) {
-            addCriterion("SRV_API_ID <>", value, "srvApiId");
+        public Criteria andPrdlineIdNotEqualTo(String value) {
+            addCriterion("PRDLINE_ID <>", value, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdGreaterThan(String value) {
-            addCriterion("SRV_API_ID >", value, "srvApiId");
+        public Criteria andPrdlineIdGreaterThan(String value) {
+            addCriterion("PRDLINE_ID >", value, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdGreaterThanOrEqualTo(String value) {
-            addCriterion("SRV_API_ID >=", value, "srvApiId");
+        public Criteria andPrdlineIdGreaterThanOrEqualTo(String value) {
+            addCriterion("PRDLINE_ID >=", value, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdLessThan(String value) {
-            addCriterion("SRV_API_ID <", value, "srvApiId");
+        public Criteria andPrdlineIdLessThan(String value) {
+            addCriterion("PRDLINE_ID <", value, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdLessThanOrEqualTo(String value) {
-            addCriterion("SRV_API_ID <=", value, "srvApiId");
+        public Criteria andPrdlineIdLessThanOrEqualTo(String value) {
+            addCriterion("PRDLINE_ID <=", value, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdLike(String value) {
-            addCriterion("SRV_API_ID like", value, "srvApiId");
+        public Criteria andPrdlineIdLike(String value) {
+            addCriterion("PRDLINE_ID like", value, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdNotLike(String value) {
-            addCriterion("SRV_API_ID not like", value, "srvApiId");
+        public Criteria andPrdlineIdNotLike(String value) {
+            addCriterion("PRDLINE_ID not like", value, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdIn(List<String> values) {
-            addCriterion("SRV_API_ID in", values, "srvApiId");
+        public Criteria andPrdlineIdIn(List<String> values) {
+            addCriterion("PRDLINE_ID in", values, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdNotIn(List<String> values) {
-            addCriterion("SRV_API_ID not in", values, "srvApiId");
+        public Criteria andPrdlineIdNotIn(List<String> values) {
+            addCriterion("PRDLINE_ID not in", values, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdBetween(String value1, String value2) {
-            addCriterion("SRV_API_ID between", value1, value2, "srvApiId");
+        public Criteria andPrdlineIdBetween(String value1, String value2) {
+            addCriterion("PRDLINE_ID between", value1, value2, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvApiIdNotBetween(String value1, String value2) {
-            addCriterion("SRV_API_ID not between", value1, value2, "srvApiId");
+        public Criteria andPrdlineIdNotBetween(String value1, String value2) {
+            addCriterion("PRDLINE_ID not between", value1, value2, "prdlineId");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIsNull() {
-            addCriterion("SRV_VERSION is null");
+        public Criteria andPrdlineVersionIsNull() {
+            addCriterion("PRDLINE_VERSION is null");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIsNotNull() {
-            addCriterion("SRV_VERSION is not null");
+        public Criteria andPrdlineVersionIsNotNull() {
+            addCriterion("PRDLINE_VERSION is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionEqualTo(String value) {
-            addCriterion("SRV_VERSION =", value, "srvVersion");
+        public Criteria andPrdlineVersionEqualTo(String value) {
+            addCriterion("PRDLINE_VERSION =", value, "prdlineVersion");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionNotEqualTo(String value) {
-            addCriterion("SRV_VERSION <>", value, "srvVersion");
+        public Criteria andPrdlineVersionNotEqualTo(String value) {
+            addCriterion("PRDLINE_VERSION <>", value, "prdlineVersion");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionGreaterThan(String value) {
-            addCriterion("SRV_VERSION >", value, "srvVersion");
+        public Criteria andPrdlineVersionGreaterThan(String value) {
+            addCriterion("PRDLINE_VERSION >", value, "prdlineVersion");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionGreaterThanOrEqualTo(String value) {
-            addCriterion("SRV_VERSION >=", value, "srvVersion");
+        public Criteria andPrdlineVersionGreaterThanOrEqualTo(String value) {
+            addCriterion("PRDLINE_VERSION >=", value, "prdlineVersion");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionLessThan(String value) {
-            addCriterion("SRV_VERSION <", value, "srvVersion");
+        public Criteria andPrdlineVersionLessThan(String value) {
+            addCriterion("PRDLINE_VERSION <", value, "prdlineVersion");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionLessThanOrEqualTo(String value) {
-            addCriterion("SRV_VERSION <=", value, "srvVersion");
+        public Criteria andPrdlineVersionLessThanOrEqualTo(String value) {
+            addCriterion("PRDLINE_VERSION <=", value, "prdlineVersion");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionLike(String value) {
-            addCriterion("SRV_VERSION like", value, "srvVersion");
+        public Criteria andPrdlineVersionLike(String value) {
+            addCriterion("PRDLINE_VERSION like", value, "prdlineVersion");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionNotLike(String value) {
-            addCriterion("SRV_VERSION not like", value, "srvVersion");
+        public Criteria andPrdlineVersionNotLike(String value) {
+            addCriterion("PRDLINE_VERSION not like", value, "prdlineVersion");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionIn(List<String> values) {
-            addCriterion("SRV_VERSION in", values, "srvVersion");
+        public Criteria andPrdlineVersionIn(List<String> values) {
+            addCriterion("PRDLINE_VERSION in", values, "prdlineVersion");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionNotIn(List<String> values) {
-            addCriterion("SRV_VERSION not in", values, "srvVersion");
+        public Criteria andPrdlineVersionNotIn(List<String> values) {
+            addCriterion("PRDLINE_VERSION not in", values, "prdlineVersion");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionBetween(String value1, String value2) {
-            addCriterion("SRV_VERSION between", value1, value2, "srvVersion");
+        public Criteria andPrdlineVersionBetween(String value1, String value2) {
+            addCriterion("PRDLINE_VERSION between", value1, value2, "prdlineVersion");
             return (Criteria) this;
         }
 
-        public Criteria andSrvVersionNotBetween(String value1, String value2) {
-            addCriterion("SRV_VERSION not between", value1, value2, "srvVersion");
+        public Criteria andPrdlineVersionNotBetween(String value1, String value2) {
+            addCriterion("PRDLINE_VERSION not between", value1, value2, "prdlineVersion");
             return (Criteria) this;
         }
 

@@ -60,5 +60,16 @@ public interface ISolPrdlineSV {
 	@POST
 	@Path("/querySolPrdlineId")
 	List<APISolPrdline> querySolPrdlineId(String PrdlineId) throws BusinessException,SystemException;
-	
+	/**
+	 * 修改产品线服务
+	 * @param prdlineId 产品线id
+     * @return int 修改产品线的个数
+     * @throws BusinessException
+	 * @throws SystemException
+     * @author biancx
+     * @ApiDocMethod
+	 */
+	@POST
+	@Path("/modifySolPrdline")
+	int modifySolPrdline(APISolPrdline Prdline) throws BusinessException,SystemException;
 }

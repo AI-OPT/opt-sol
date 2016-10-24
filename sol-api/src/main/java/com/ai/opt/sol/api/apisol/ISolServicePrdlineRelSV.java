@@ -11,17 +11,16 @@ import javax.ws.rs.core.MediaType;
 import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
+import com.ai.opt.sol.api.apisol.param.APISolServicePrdlineRel;
 import com.ai.opt.sol.api.apisol.param.APISolServiceDefine;
-import com.ai.opt.sol.api.apisol.param.APISolServiceDefineQuery;
-
 @Path("/SOLFun")
 @Consumes({ MediaType.APPLICATION_JSON })
 @Produces({ MediaType.APPLICATION_JSON, MediaType.TEXT_XML })
-public interface ISolServiceDefineSV {
+public interface ISolServicePrdlineRelSV {
 	/**
-	 * 定义服务接口
+     * 新建服务产品标签记录
      * 
-     * @param solServiceDefine
+     * @param APISolServicePrdlineRel
      * @return BaseResponse
      * @throws BusinessException
 	 * @throws SystemException
@@ -29,20 +28,19 @@ public interface ISolServiceDefineSV {
      * @ApiDocMethod
      */
 	@POST
-	@Path("/createSolService")
-	BaseResponse createSolService(APISolServiceDefine solServiceDefine) throws BusinessException,SystemException;
-	
+	@Path("/createSolServicePrdlineRel")
+	BaseResponse createSolServicePrdlineRel(APISolServicePrdlineRel srvPrdlineRel) throws BusinessException,SystemException;
 	/**
-	 * 根据服务名称、服务编码、所属中心、所属分类查询
-     * 
-     * @param solServiceDefine
-     * @return List<APISolServiceDefine>
+	 * 产品线目录管理服务报表
+	 * @param prdlineId
+     * @return list<APISolServiceDefine>
      * @throws BusinessException
 	 * @throws SystemException
      * @author biancx
      * @ApiDocMethod
-     */
+	 */
 	@POST
-	@Path("/querySolService")
-	List<APISolServiceDefine> querySolService(APISolServiceDefine solServiceDefineQuery) throws BusinessException,SystemException;
+	@Path("/manageSolServicePrdlineRel")
+	List<APISolServiceDefine> manageSolServicePrdlineRel(String prdlineId) throws BusinessException,SystemException;
+	
 }

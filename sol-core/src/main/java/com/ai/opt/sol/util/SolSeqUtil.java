@@ -32,4 +32,16 @@ public final class SolSeqUtil {
 	public static String getServiceOutputId(){
 		return SeqUtil.getNewId(SEQ.SOL_SERVICE_OUTPUT_ID_SEQ, 10);
 	}
+	/**
+	 * 获取服务产品标签id
+	 */
+	public static String getSrvPrdlineId(){
+		return SeqUtil.getNewId(SEQ.SOL_SERVICE_PRDLINE_ID_SEQ, 10);
+	}
+	/**
+	 * 产品线版本id
+	 */
+	public static String getPrdlineVersionId(){
+		return SeqUtil.getNewId(SEQ.SOL_PRDLINE_VERSION_ID_SEQ, 10);
+	}
 }

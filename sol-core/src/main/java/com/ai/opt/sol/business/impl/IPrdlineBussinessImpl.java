@@ -58,5 +58,25 @@ public class IPrdlineBussinessImpl implements IPrdlineBussiness{
 			return solPrdlineMapper.selectByExample(sql);
 		}
 	}
+	@Override
+	public int modifyPrdlineSV(APISolPrdline prdline) {
+		if(StringUtil.isBlank(prdline.getPrdlineId())){
+			throw new BusinessException("产品线id不能为空");
+		}else{
+			SolPrdline solPrdline=new SolPrdline();
+			solPrdline.setCreateTime(DateUtil.getTimestamp(prdline.getCreateTime(), DateUtil.YYYYMMDDHHMMSS));
+			solPrdline.setIndustryCode(prdline.getIndustryCode());
+			solPrdline.setPrdlineId(prdline.getPrdlineId());
+			solPrdline.setPrdlineManager(prdline.getPrdlineManager());
+			solPrdline.setPrdlineName(prdline.getPrdlineName());
+			solPrdline.setPrdlineRemark(prdline.getPrdlineRemark());
+			solPrdline.setUpdateTime(DateUtil.getTimestamp(prdline.getUpdateTime(), DateUtil.YYYYMMDDHHMMSS));
+			solPrdline.setPrdlineCode(prdline.getPrdlineCode());
+			SolPrdlineCriteria sql=new SolPrdlineCriteria();
+			SolPrdlineCriteria.Criteria criteria=sql.createCriteria();
+			criteria.andPrdlineIdEqualTo(solPrdline.getPrdlineId());
+			return  solPrdlineMapper.updateByExampleSelective(solPrdline, sql);
+		}
+	}
 
 }

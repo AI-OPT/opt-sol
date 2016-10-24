@@ -104,4 +104,10 @@ public class SolPrdlineImpl implements ISolPrdlineSV{
 		return apiSolPrdlines;
 	}
 
+
+	@Override
+	public int modifySolPrdline(APISolPrdline solPrdline) throws BusinessException, SystemException {
+		return prdlineBussiness.modifyPrdlineSV(solPrdline);
+	}
+
 }

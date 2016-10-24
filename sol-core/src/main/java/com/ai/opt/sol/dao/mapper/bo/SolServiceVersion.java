@@ -1,5 +1,7 @@
 package com.ai.opt.sol.dao.mapper.bo;
 
+import java.sql.Timestamp;
+
 public class SolServiceVersion {
     private String srvVersionId;
 
@@ -8,6 +10,8 @@ public class SolServiceVersion {
     private String srvVersion;
 
     private String versionRemark;
+
+    private Timestamp createTime;
 
     public String getSrvVersionId() {
         return srvVersionId;
@@ -39,5 +43,13 @@ public class SolServiceVersion {
 
     public void setVersionRemark(String versionRemark) {
         this.versionRemark = versionRemark == null ? null : versionRemark.trim();
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 }
