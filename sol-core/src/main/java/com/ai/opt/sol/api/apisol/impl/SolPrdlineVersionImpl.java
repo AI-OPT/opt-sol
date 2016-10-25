@@ -38,6 +38,7 @@ public class SolPrdlineVersionImpl implements ISolPrdlineVersionSV{
 					 throw new BusinessException("000001","prdlineVersionId不能为空");
 				}
 				solPrdlineVersion.setPrdlineVersionId(prdlineVersionId);
+				prdlineVersionbuss.insertPrdlineVersion(solPrdlineVersion);
 			}
 		}catch(BusinessException e){
 			 LOG.error("定义产品线版本格式失败",e);

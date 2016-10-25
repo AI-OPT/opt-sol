@@ -1,5 +1,6 @@
 package com.ai.opt.sol.api.apisol.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +16,9 @@ import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sol.api.apisol.ISolServiceDefineSV;
 import com.ai.opt.sol.api.apisol.param.APISolServiceDefine;
 import com.ai.opt.sol.api.apisol.param.APISolServiceDefineQuery;
+import com.ai.opt.sol.api.apisol.param.APISrvQueryCount;
 import com.ai.opt.sol.business.interfaces.ISolServiceDefineBussiness;
+import com.ai.opt.sol.dao.mapper.bo.SolServiceDefine;
 import com.ai.opt.sol.util.SolSeqUtil;
 
 public class SolServiceDefineImpl implements ISolServiceDefineSV{
@@ -55,8 +58,15 @@ public class SolServiceDefineImpl implements ISolServiceDefineSV{
 	}
 
 	@Override
-	public  List<APISolServiceDefine> querySolService(APISolServiceDefine solServiceDefineQuery) throws BusinessException, SystemException {
-		
+	public  List<APISrvQueryCount> querySolService(APISolServiceDefine solServiceDefineQuery) throws BusinessException, SystemException {
+		List<SolServiceDefine> solSrvDefines=new ArrayList<SolServiceDefine>();
+		solSrvDefines=serviceDefineBussiness.queryServiceByParams(solServiceDefineQuery);
+		APISrvQueryCount srvQueryCount=new APISrvQueryCount();
+		for(SolServiceDefine solSrvDefine:solSrvDefines){
+			String srvId=solSrvDefine.getSrvApiId();
+			
+			
+		}
 		return null;
 	}
 

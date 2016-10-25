@@ -16,7 +16,7 @@ public class APISolServiceVersion implements Serializable{
 	/**
 	 * 服务版本
 	 */
-	private String versionId;
+	private String srvVersion;
 	/**
 	 * 版本摘要
 	 */
@@ -25,6 +25,7 @@ public class APISolServiceVersion implements Serializable{
 	 * 版本创建时间
 	 */
 	private String createTime;
+	
 	public String getSrvVersionId() {
 		return srvVersionId;
 	}
@@ -37,11 +38,11 @@ public class APISolServiceVersion implements Serializable{
 	public void setSrvApiId(String srvApiId) {
 		this.srvApiId = srvApiId;
 	}
-	public String getVersionId() {
-		return versionId;
+	public String getSrvVersion() {
+		return srvVersion;
 	}
-	public void setVersionId(String versionId) {
-		this.versionId = versionId;
+	public void setSrvVersion(String srvVersion) {
+		this.srvVersion = srvVersion;
 	}
 	public String getVersionRemark() {
 		return versionRemark;

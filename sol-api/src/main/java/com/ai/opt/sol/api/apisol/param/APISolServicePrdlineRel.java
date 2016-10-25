@@ -20,7 +20,7 @@ public class APISolServicePrdlineRel implements Serializable{
 	/**
 	 * 产品线版本
 	 */
-	private String prdVersion;
+	private String prdVersionId;
 	/**
 	 * 服务版本
 	 */
@@ -52,11 +52,11 @@ public class APISolServicePrdlineRel implements Serializable{
 	public void setSrvApiId(String srvApiId) {
 		this.srvApiId = srvApiId;
 	}
-	public String getPrdVersion() {
-		return prdVersion;
+	public String getPrdVersionId() {
+		return prdVersionId;
 	}
-	public void setPrdVersion(String prdVersion) {
-		this.prdVersion = prdVersion;
+	public void setPrdVersionId(String prdVersionId) {
+		this.prdVersionId = prdVersionId;
 	}
 	public String getSrvVersionId() {
 		return srvVersionId;

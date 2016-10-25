@@ -8,4 +8,6 @@ import com.ai.opt.sol.dao.mapper.bo.SolServiceDefine;
 public interface ISolServicePrdlineRelBussiness {
 	public void insertSrvPrdRel(APISolServicePrdlineRel srvPrdRel);
 	public List<SolServiceDefine> querySrvPrdRel(String prdlineId);
+	public int countBySrvId(String srvId);
+	public int countByPrdline(String prdlineId);
 }

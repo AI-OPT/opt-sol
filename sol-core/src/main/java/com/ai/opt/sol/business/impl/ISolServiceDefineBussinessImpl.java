@@ -45,5 +45,19 @@ public class ISolServiceDefineBussinessImpl implements ISolServiceDefineBussines
 			return null;
 		}
 	}
+	@Override
+	public List<SolServiceDefine> queryServiceByParams(APISolServiceDefine solServiceDefine) {
+		SolServiceDefineCriteria sql=new SolServiceDefineCriteria();
+		SolServiceDefineCriteria.Criteria criteria=sql.createCriteria();
+		if(!StringUtils.isBlank(solServiceDefine.getSrvApiName()))
+			criteria.andSrvApiNameEqualTo(solServiceDefine.getSrvApiName());
+		if(!StringUtils.isBlank(solServiceDefine.getSrvCenter()))
+			criteria.andSrvCenterEqualTo(solServiceDefine.getSrvCenter());
+		if(!StringUtils.isBlank(solServiceDefine.getSrvCenter()))
+			criteria.andSrvClassEqualTo(solServiceDefine.getSrvCenter());
+		if(!StringUtils.isBlank(solServiceDefine.getSrvApiId()))
+			criteria.andSrvApiIdEqualTo(solServiceDefine.getSrvApiId());
+		return solServiceDefineMapper.selectByExample(sql);				
+	}
 
 }

@@ -13,6 +13,7 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.sol.api.apisol.param.APISolServiceDefine;
 import com.ai.opt.sol.api.apisol.param.APISolServiceDefineQuery;
+import com.ai.opt.sol.api.apisol.param.APISrvQueryCount;
 
 @Path("/SOLFun")
 @Consumes({ MediaType.APPLICATION_JSON })
@@ -44,5 +45,5 @@ public interface ISolServiceDefineSV {
      */
 	@POST
 	@Path("/querySolService")
-	List<APISolServiceDefine> querySolService(APISolServiceDefine solServiceDefineQuery) throws BusinessException,SystemException;
+	List<APISrvQueryCount> querySolService(APISolServiceDefine solServiceDefineQuery) throws BusinessException,SystemException;
 }

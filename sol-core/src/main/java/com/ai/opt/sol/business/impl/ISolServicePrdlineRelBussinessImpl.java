@@ -32,7 +32,7 @@ public class ISolServicePrdlineRelBussinessImpl implements ISolServicePrdlineRel
 		SolServicePrdlineRel srvPrdlineRel=new SolServicePrdlineRel();
 		srvPrdlineRel.setCreateTime(DateUtil.getTimestamp(srvPrdRel.getCreateTime(), DateUtil.YYYYMMDDHHMMSS));
 		srvPrdlineRel.setPrdlineId(srvPrdRel.getPrdlineId());
-		srvPrdlineRel.setPrdVersion(srvPrdRel.getPrdVersion());
+		srvPrdlineRel.setPrdVersion(srvPrdRel.getPrdVersionId());
 		srvPrdlineRel.setSrvApiId(srvPrdRel.getSrvApiId());
 		srvPrdlineRel.setSrvPrdlineId(srvPrdRel.getSrvPrdlineId());
 		srvPrdlineRel.setSrvVersionId(srvPrdRel.getSrvVersionId());
@@ -61,6 +61,20 @@ public class ISolServicePrdlineRelBussinessImpl implements ISolServicePrdlineRel
 			}
 			return serviceDefines;
 		}
+	}
+
+	@Override
+	public int countBySrvId(String srvId) {
+		SolServicePrdlineRelCriteria sql=new SolServicePrdlineRelCriteria();
+		SolServicePrdlineRelCriteria.Criteria criteria=sql.createCriteria();
+		
+		return 0;
+	}
+
+	@Override
+	public int countByPrdline(String prdlineId) {
+		
+		return 0;
 	}
 
 }
