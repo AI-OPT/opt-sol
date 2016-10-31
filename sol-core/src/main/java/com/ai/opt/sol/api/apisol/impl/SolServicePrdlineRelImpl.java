@@ -1,6 +1,7 @@
 package com.ai.opt.sol.api.apisol.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -16,10 +17,19 @@ import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sol.api.apisol.ISolServicePrdlineRelSV;
+import com.ai.opt.sol.api.apisol.param.APIPrdFlag;
 import com.ai.opt.sol.api.apisol.param.APISolServiceDefine;
 import com.ai.opt.sol.api.apisol.param.APISolServicePrdlineRel;
+import com.ai.opt.sol.api.apisol.param.APISolSrvPrdline;
+import com.ai.opt.sol.business.interfaces.IPrdlineBussiness;
+import com.ai.opt.sol.business.interfaces.ISolPrdlineVersionBussiness;
 import com.ai.opt.sol.business.interfaces.ISolServicePrdlineRelBussiness;
+import com.ai.opt.sol.business.interfaces.ISolServiceVersionBussiness;
+import com.ai.opt.sol.dao.mapper.bo.SolPrdline;
+import com.ai.opt.sol.dao.mapper.bo.SolPrdlineVersion;
 import com.ai.opt.sol.dao.mapper.bo.SolServiceDefine;
+import com.ai.opt.sol.dao.mapper.bo.SolServicePrdlineRel;
+import com.ai.opt.sol.dao.mapper.bo.SolServiceVersion;
 import com.ai.opt.sol.util.SolSeqUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 @Service
@@ -28,6 +38,12 @@ public class SolServicePrdlineRelImpl implements ISolServicePrdlineRelSV{
 	private static final Logger LOG=LogManager.getLogger(SolServicePrdlineRelImpl.class);
 	@Autowired
 	ISolServicePrdlineRelBussiness srvPrdlineRelBussiness;
+	@Autowired
+	IPrdlineBussiness prdlineBussiness;
+	@Autowired
+	ISolServiceVersionBussiness srvVersionBussiness;
+	@Autowired
+	ISolPrdlineVersionBussiness prdVersionBussiness;
 	@Override
 	public BaseResponse createSolServicePrdlineRel(APISolServicePrdlineRel srvPrdlineRel) throws BusinessException, SystemException {
 		BaseResponse response;
@@ -58,13 +74,10 @@ public class SolServicePrdlineRelImpl implements ISolServicePrdlineRelSV{
 	}
 
 	@Override
-	public List<APISolServiceDefine> manageSolServicePrdlineRel(String prdlineId) throws BusinessException, SystemException {
-		if(StringUtil.isBlank(prdlineId)){
-			throw new BusinessException("000001","prdlineId不能为空");
-		}else{
+	public List<APISolServiceDefine> manageSolServicePrdlineRel(APISolSrvPrdline srvPrdline) throws BusinessException, SystemException {
 			List<APISolServiceDefine> apiSolSrvDefines=new ArrayList<APISolServiceDefine>();
 			List<SolServiceDefine> solSrvDefines=new ArrayList<SolServiceDefine>();
-			solSrvDefines=srvPrdlineRelBussiness.querySrvPrdRel(prdlineId);
+			solSrvDefines=srvPrdlineRelBussiness.querySrvPrdRel(srvPrdline.getPrdlineId());
 			for(SolServiceDefine solSrvDefine:solSrvDefines){
 				APISolServiceDefine apiSolSrvDefine=new APISolServiceDefine();
 				apiSolSrvDefine.setCreateTime(DateUtil.getDateString(solSrvDefine.getCreateTime(), DateUtil.YYYYMMDDHHMMSS));
@@ -77,8 +90,83 @@ public class SolServicePrdlineRelImpl implements ISolServicePrdlineRelSV{
 				apiSolSrvDefine.setUpdateTime(DateUtil.getDateString(solSrvDefine.getUpdateTime(), DateUtil.YYYYMMDDHHMMSS));
 				apiSolSrvDefines.add(apiSolSrvDefine);
 			}
-			return apiSolSrvDefines;
+			if(StringUtil.isBlank(srvPrdline.getSrvApiId())&&StringUtil.isBlank(srvPrdline.getSrvApiName())&&StringUtil.isBlank(srvPrdline.getSrvCategoryId())&&StringUtil.isBlank(srvPrdline.getSrvCenter())){
+
+				return apiSolSrvDefines;
+			}else{
+				Iterator<APISolServiceDefine> iter=apiSolSrvDefines.iterator();
+				if(!StringUtil.isBlank(srvPrdline.getSrvApiId())){
+					while(iter.hasNext()){
+						if(!(srvPrdline.getSrvApiId()).equals(iter.next().getSrvApiId()))
+							iter.remove();
+					}
+					return apiSolSrvDefines;
+				}
+				if(!StringUtil.isBlank(srvPrdline.getSrvApiName())){
+					while(iter.hasNext()){
+						if(!(srvPrdline.getSrvApiName()).equals(iter.next().getSrvApiName()))
+							iter.remove();
+					}
+					return apiSolSrvDefines;
+				}
+				if(!StringUtil.isBlank(srvPrdline.getSrvCategoryId())){
+					while(iter.hasNext()){
+						if(!(srvPrdline.getSrvCategoryId()).equals(iter.next().getSrvCategoryId()))
+							iter.remove();
+					}
+					return apiSolSrvDefines;
+				}
+				if(!StringUtil.isBlank(srvPrdline.getSrvCenter())){
+					while(iter.hasNext()){
+						if(!(srvPrdline.getSrvCenter()).equals(iter.next().getSrvCenter()))
+							iter.remove();
+					}
+					return apiSolSrvDefines;
+				}
+				return apiSolSrvDefines;
+			}
+
+	}
+
+	@Override
+	public List<APISolServicePrdlineRel> modifySolServicePrdlineRel(APISolServicePrdlineRel srvPrdlineRel) throws BusinessException, SystemException {
+		
+		return null;
+	}
+
+	@Override
+	public List<APIPrdFlag> querySolServicePrdlineRel(String srvApiId) throws BusinessException, SystemException {
+		 List<APIPrdFlag> apiPrdFlags=new ArrayList<APIPrdFlag>();
+		if(!StringUtil.isBlank(srvApiId)){
+			List<SolServicePrdlineRel> solSrvPrdlineRels=new ArrayList<SolServicePrdlineRel>();
+			solSrvPrdlineRels=srvPrdlineRelBussiness.queryPrdlineSrv(srvApiId);
+			for(SolServicePrdlineRel solSrvPrdlineRel:solSrvPrdlineRels){
+				APIPrdFlag apiPrdFlag=new APIPrdFlag();
+				String prdlineId=solSrvPrdlineRel.getSrvPrdlineId();
+				List<SolPrdline> solPrdlines=new ArrayList<SolPrdline>();
+				List<SolPrdlineVersion> prdlineVersions=new ArrayList<SolPrdlineVersion>();
+				List<SolServiceVersion> srvVersions=new ArrayList<SolServiceVersion>();
+				solPrdlines=prdlineBussiness.queryPrdlineId(prdlineId);
+				apiPrdFlag.setPrdlineCode(prdlineId);
+				apiPrdFlag.setPrdlineVersionId(solSrvPrdlineRel.getPrdVersion());
+				apiPrdFlag.setSrvPrdlineId(solSrvPrdlineRel.getSrvPrdlineId());
+				apiPrdFlag.setSrvVersionId(solSrvPrdlineRel.getSrvVersionId());
+				for(SolPrdline solPrdline:solPrdlines){
+					apiPrdFlag.setPrdlineManager(solPrdline.getPrdlineManager());
+					apiPrdFlag.setPrdlineName(solPrdline.getPrdlineName());	
+				}
+				srvVersions=srvVersionBussiness.queryBySrvVertion(solSrvPrdlineRel.getSrvVersionId());
+				for(SolServiceVersion srvVersion:srvVersions){
+					apiPrdFlag.setServiceVersion(srvVersion.getSrvVersion());
+				}
+				prdlineVersions=prdVersionBussiness.queryByPrdversionId(solSrvPrdlineRel.getPrdVersion());
+				for(SolPrdlineVersion prdlineVersion:prdlineVersions){
+					apiPrdFlag.setPrdlineVersion(prdlineVersion.getPrdlineVersion());
+				}
+				apiPrdFlags.add(apiPrdFlag);
+			}
 		}
+		return apiPrdFlags;
 	}
 
 }

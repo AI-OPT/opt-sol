@@ -46,4 +46,19 @@ public interface ISolServiceDefineSV {
 	@POST
 	@Path("/querySolService")
 	List<APISrvQueryCount> querySolService(APISolServiceDefine solServiceDefineQuery) throws BusinessException,SystemException;
+	
+	/**
+	 * 根据服务名称、服务编码、所属中心、所属分类查询
+     * 
+     * @param solServiceDefine
+     * @return List<APISolServiceDefine>
+     * @throws BusinessException
+	 * @throws SystemException
+     * @author biancx
+     * @ApiDocMethod
+     */
+	@POST
+	@Path("/modifySolService")
+	int modifySolService(APISolServiceDefine solServiceDefineQuery) throws BusinessException,SystemException;
+	
 }

@@ -60,4 +60,17 @@ public interface ISolPrdlineVersionSV {
 	@Path("/querySolPrdlineVersion")
 	List<APISolPrdlineVersionResult> querySolPrdlineVersion(APISolPrdline apiSolPrdline) throws BusinessException,SystemException;
 	
+	/**
+	 * 查询产品线版本信息
+	 * @param APISolPrdline
+     * @return List<APISolPrdlineVersionResult>
+     * @throws BusinessException
+	 * @throws SystemException
+     * @author biancx
+     * @ApiDocMethod
+	 */
+	@POST
+	@Path("/querySolPrdlineVersionId")
+	List<APISolPrdlineVersion> querySolPrdlineVersionId(String prdlineId) throws BusinessException,SystemException;
+	
 }

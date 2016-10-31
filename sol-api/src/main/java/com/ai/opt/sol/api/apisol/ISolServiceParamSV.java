@@ -1,5 +1,7 @@
 package com.ai.opt.sol.api.apisol;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -29,7 +31,7 @@ public interface ISolServiceParamSV {
     */
 	@POST
 	@Path("/designServiceInput")
-	BaseResponse designServiceInput(APISolServiceDesignInput solServiceDesignInput) throws BusinessException,SystemException;
+	BaseResponse createServiceInput(APISolServiceDesignInput solServiceDesignInput) throws BusinessException,SystemException;
 	
 	/**
 	* 定义服务出参接口
@@ -43,7 +45,7 @@ public interface ISolServiceParamSV {
     */
 	@POST
 	@Path("/designServiceOutput")
-	BaseResponse designServiceOutput(APISolServiceDesignOutput solServiceDesignOutput) throws BusinessException,SystemException;
+	BaseResponse createServiceOutput(APISolServiceDesignOutput solServiceDesignOutput) throws BusinessException,SystemException;
 	
 	/**
 	* 查询服务信息
@@ -57,4 +59,57 @@ public interface ISolServiceParamSV {
 	@POST
 	@Path("/queryService")
 	APISolServiceQueryResult designServiceQuery(String srvApiId) throws BusinessException,SystemException;
+	/**
+	* 修改入参服务信息
+	* @param srvApiId
+    * @return  List<APISolServiceDesignInput>
+    * @throws BusinessException
+	* @throws SystemException
+    * @author biancx
+    * @ApiDocMethod 
+	 */
+	@POST
+	@Path("/modifyInputServiceParam")
+	List<APISolServiceDesignInput> modifyInputServiceParam(APISolServiceDesignInput srvApiId) throws BusinessException,SystemException;
+	
+	/**
+	* 修改出参服务信息
+	* @param srvApiId
+    * @return  List<APISolServiceDesignOutput>
+    * @throws BusinessException
+	* @throws SystemException
+    * @author biancx
+    * @ApiDocMethod 
+	 */
+	@POST
+	@Path("/modifyOutputServiceParam")
+	List<APISolServiceDesignOutput> modifyOutputServiceParam(APISolServiceDesignOutput srvApiId) throws BusinessException,SystemException;
+	/**
+	* 删除入参服务信息
+	* @param srvApiId
+    * @return  List<APISolServiceDesignInput>
+    * @throws BusinessException
+	* @throws SystemException
+    * @author biancx
+    * @ApiDocMethod 
+	 */
+	@POST
+	@Path("/delInputServiceParam")
+	int delInputServiceParam(APISolServiceDesignInput srvInput) throws BusinessException,SystemException;
+	
+	/**
+	* 删除出参服务信息
+	* @param srvApiId
+    * @return  List<APISolServiceDesignOutput>
+    * @throws BusinessException
+	* @throws SystemException
+    * @author biancx
+    * @ApiDocMethod 
+	 */
+	@POST
+	@Path("/delOutputServiceParam")
+	void delOutputServiceParam(APISolServiceDesignOutput srvOutput) throws BusinessException,SystemException;
 }
+
+
+

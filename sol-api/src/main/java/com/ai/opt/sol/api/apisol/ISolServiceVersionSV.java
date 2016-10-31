@@ -12,6 +12,7 @@ import com.ai.opt.base.exception.BusinessException;
 import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.sol.api.apisol.param.APISolPrdline;
+import com.ai.opt.sol.api.apisol.param.APISolServiceDefine;
 import com.ai.opt.sol.api.apisol.param.APISolServiceVersion;
 
 @Path("/SOLFun")
@@ -33,7 +34,7 @@ public interface ISolServiceVersionSV {
 	BaseResponse createSolServiceVersion(APISolServiceVersion solSrvVersion) throws BusinessException,SystemException;
 	/**
 	 * 打版本和版本记录
-     * @param srvApiId
+     * @param APISolServiceDefine
      * @return List<APISolServiceVersion>
      * @throws BusinessException
 	 * @throws SystemException
@@ -42,5 +43,18 @@ public interface ISolServiceVersionSV {
 	 */
 	@POST
 	@Path("/querySolServiceVersion")
-	List<APISolServiceVersion> querySolServiceVersion(String srvApiId)throws BusinessException,SystemException;
+	List<APISolServiceVersion> querySolServiceVersion(APISolServiceDefine solSrvDefine)throws BusinessException,SystemException;
+	
+	/**
+	 * 获得服务的list
+     * @param APISolServiceDefine
+     * @return List<APISolServiceVersion>
+     * @throws BusinessException
+	 * @throws SystemException
+     * @author biancx
+     * @ApiDocMethod
+	 */
+	@POST
+	@Path("/querySolServiceVersionId")
+	List<APISolServiceVersion> querySolServiceVersionId(String srvApiId)throws BusinessException,SystemException;
 }

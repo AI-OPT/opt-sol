@@ -64,17 +64,15 @@ public class ISolServicePrdlineRelBussinessImpl implements ISolServicePrdlineRel
 	}
 
 	@Override
-	public int countBySrvId(String srvId) {
+	public List<SolServicePrdlineRel> queryPrdlineSrv(String srvApiId) {
+		
 		SolServicePrdlineRelCriteria sql=new SolServicePrdlineRelCriteria();
 		SolServicePrdlineRelCriteria.Criteria criteria=sql.createCriteria();
-		
-		return 0;
+		criteria.andPrdlineIdEqualTo(srvApiId);
+		return solServicePrdlineRelMapper.selectByExample(sql);
 	}
 
-	@Override
-	public int countByPrdline(String prdlineId) {
-		
-		return 0;
-	}
+
+
 
 }

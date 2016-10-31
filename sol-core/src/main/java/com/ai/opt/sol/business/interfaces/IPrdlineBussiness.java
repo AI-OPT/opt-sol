@@ -11,5 +11,6 @@ public interface IPrdlineBussiness {
 	public List<SolPrdline> queryPrdlineName(APISolPrdlineQuery prdline);
 	public List<SolPrdline> queryPrdlineId(String prdlineId);
 	public int modifyPrdlineSV(APISolPrdline prdline);
+	public int delPrdlineId(APISolPrdline apiPrdline);
 
 }

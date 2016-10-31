@@ -1,5 +1,7 @@
 package com.ai.opt.sol.api.apisol.impl;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ public class SolServiceParamImpl implements ISolServiceParamSV{
 	@Autowired
 	ISolServiceDesignOutputBussiness serviceOutputBussiness;
 	@Override
-	public BaseResponse designServiceInput(APISolServiceDesignInput solServiceDesignInput) throws BusinessException, SystemException {
+	public BaseResponse createServiceInput(APISolServiceDesignInput solServiceDesignInput) throws BusinessException, SystemException {
 		
 		BaseResponse response;
 		try{
@@ -59,7 +61,7 @@ public class SolServiceParamImpl implements ISolServiceParamSV{
 	}
 
 	@Override
-	public BaseResponse designServiceOutput(APISolServiceDesignOutput solServiceDesignOutput) throws BusinessException, SystemException {
+	public BaseResponse createServiceOutput(APISolServiceDesignOutput solServiceDesignOutput) throws BusinessException, SystemException {
 		
 		BaseResponse response;
 		try{
@@ -97,6 +99,28 @@ public class SolServiceParamImpl implements ISolServiceParamSV{
 	public APISolServiceQueryResult designServiceQuery(String srvApiId) throws BusinessException, SystemException {
 		
 		return null;
+	}
+
+	@Override
+	public List<APISolServiceDesignInput> modifyInputServiceParam(APISolServiceDesignInput srvApiId) throws BusinessException, SystemException {
+		
+		return null;
+	}
+
+	@Override
+	public List<APISolServiceDesignOutput> modifyOutputServiceParam(APISolServiceDesignOutput srvApiId) throws BusinessException, SystemException {
+		
+		return null;
+	}
+
+	@Override
+	public int delInputServiceParam(APISolServiceDesignInput srvInput) throws BusinessException, SystemException {
+		
+		return 0;
+	}
+
+	@Override
+	public void delOutputServiceParam(APISolServiceDesignOutput srvOutput) throws BusinessException, SystemException {
 	}
 
 }

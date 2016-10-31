@@ -16,6 +16,7 @@ import com.ai.opt.sol.api.apisol.param.APISolPrdlineQuery;
 import com.ai.opt.sol.api.apisol.param.APISolServiceDefine;
 import com.ai.opt.sol.api.apisol.param.APISolServiceDesignInput;
 import com.ai.opt.sol.api.apisol.param.APISolServiceDesignOutput;
+import com.ai.opt.sol.api.apisol.param.APISolSrvPrdline;
 
 @Path("/SOLFun")
 @Consumes({ MediaType.APPLICATION_JSON })
@@ -50,7 +51,7 @@ public interface ISolPrdlineSV {
 	
 	/**
 	 * 根据产品线id查询
-	 * @param prdlineId 产品线id
+	 * @param APISolSrvPrdline
      * @return APISolPrdline
      * @throws BusinessException
 	 * @throws SystemException
@@ -72,4 +73,17 @@ public interface ISolPrdlineSV {
 	@POST
 	@Path("/modifySolPrdline")
 	int modifySolPrdline(APISolPrdline Prdline) throws BusinessException,SystemException;
+	
+	/**
+	 * 修改产品线服务
+	 * @param prdlineId 产品线id
+     * @return int 修改产品线的个数
+     * @throws BusinessException
+	 * @throws SystemException
+     * @author biancx
+     * @ApiDocMethod
+	 */
+	@POST
+	@Path("/delSolPrdline")
+	int delSolPrdline(APISolPrdline Prdline) throws BusinessException,SystemException;
 }

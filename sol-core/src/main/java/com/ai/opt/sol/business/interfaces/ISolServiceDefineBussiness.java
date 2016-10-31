@@ -9,4 +9,5 @@ public interface ISolServiceDefineBussiness {
 	public void insertServiceDefine(APISolServiceDefine solServiceDefine);
 	public List<SolServiceDefine> queryServiceById(String srvApiId);
 	public List<SolServiceDefine> queryServiceByParams(APISolServiceDefine solServiceDefine);
+	public int modifySrvDefine(APISolServiceDefine solServiceDefine);
 }

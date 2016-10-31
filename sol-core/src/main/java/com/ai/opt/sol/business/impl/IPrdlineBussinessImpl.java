@@ -78,5 +78,12 @@ public class IPrdlineBussinessImpl implements IPrdlineBussiness{
 			return  solPrdlineMapper.updateByExampleSelective(solPrdline, sql);
 		}
 	}
+	@Override
+	public int delPrdlineId(APISolPrdline apiPrdline) {
+		SolPrdlineCriteria sql=new SolPrdlineCriteria();
+		SolPrdlineCriteria.Criteria criteria=sql.createCriteria();
+		criteria.andPrdlineIdEqualTo(apiPrdline.getPrdlineId());
+		return solPrdlineMapper.deleteByExample(sql);
+	}
 
 }

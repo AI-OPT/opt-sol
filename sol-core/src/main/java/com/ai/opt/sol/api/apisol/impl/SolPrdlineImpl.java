@@ -1,8 +1,10 @@
 package com.ai.opt.sol.api.apisol.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sol.api.apisol.ISolPrdlineSV;
 import com.ai.opt.sol.api.apisol.param.APISolPrdline;
 import com.ai.opt.sol.api.apisol.param.APISolPrdlineQuery;
+import com.ai.opt.sol.api.apisol.param.APISolSrvPrdline;
 import com.ai.opt.sol.business.interfaces.IPrdlineBussiness;
 import com.ai.opt.sol.dao.mapper.bo.SolPrdline;
 import com.ai.opt.sol.dao.mapper.bo.SolPrdlineCriteria;
@@ -81,10 +84,10 @@ public class SolPrdlineImpl implements ISolPrdlineSV{
 	}
 
 	@Override
-	public List<APISolPrdline> querySolPrdlineId(String PrdlineId) throws BusinessException, SystemException {
+	public List<APISolPrdline> querySolPrdlineId(String prdlineId) throws BusinessException, SystemException {
 		List<APISolPrdline> apiSolPrdlines=new ArrayList<APISolPrdline>();
 		try{
-			List<SolPrdline> solPrdlines=prdlineBussiness.queryPrdlineId(PrdlineId);
+			List<SolPrdline> solPrdlines=prdlineBussiness.queryPrdlineId(prdlineId);
 			for(SolPrdline solPrdline:solPrdlines){
 				APISolPrdline apiSolPrdline=new APISolPrdline();
 				apiSolPrdline.setCreateTime(DateUtil.getDateString(solPrdline.getCreateTime(), DateUtil.YYYYMMDDHHMMSS));
@@ -101,13 +104,20 @@ public class SolPrdlineImpl implements ISolPrdlineSV{
 			 LOG.error("查询产品线数据格式失败",e);
 	         throw e;
 		}
-		return apiSolPrdlines;
+			return apiSolPrdlines;
 	}
 
 
 	@Override
 	public int modifySolPrdline(APISolPrdline solPrdline) throws BusinessException, SystemException {
 		return prdlineBussiness.modifyPrdlineSV(solPrdline);
+	}
+
+
+	@Override
+	public int delSolPrdline(APISolPrdline Prdline) throws BusinessException, SystemException {
+		
+		return prdlineBussiness.delPrdlineId(Prdline);
 	}
 
 }
